@@ -1,77 +1,122 @@
-EXEC(N'CREATE OR ALTER PROC CREATE_COUNTRY_INFO
+EXEC(N'CREATE OR ALTER PROC PRODUCT_INSERT_OR_UPDATE
 (
-   @Id bigint=null,
-   @CountryName nvarchar(MAX),
-   @CountryCode nvarchar(MAX),
-   @CreatedAt datetime2 = NULL,
-   @UpdatedAt datetime2 = NULL,
-   @CreatedBy bigint = NULL,
-   @UpdatedBy bigint = NULL,
-   @IsDeleted bit
+   @Id BIGINT=null,   
+   @ProductBrandId BIGINT,
+   @ProductTypeId BIGINT,
+   @Name NVARCHAR(MAX),
+   @Summary NVARCHAR(MAX),
+   @Description NVARCHAR(MAX),
+   @ImageFile NVARCHAR(MAX),
+   @Price DECIMAL(10, 2)
 )
 AS
 BEGIN
-    IF ISNULL(@Id,0)>0
-    BEGIN
-        SET IDENTITY_INSERT Country ON;
-        INSERT INTO Country (
+    SET NOCOUNT ON;
+    IF ISNULL(@Id,0)<=0
+    BEGIN       
+        INSERT INTO Product (
             Id,
-            CountryName,
-            CountryCode,
-            CreatedAt,
-            UpdatedAt,
-            CreatedBy,
-            UpdatedBy,
+            ProductBrandId,
+            ProductTypeId,
+            Name,
+            Summary,
+            Description,
+            ImageFile,
+            Price,
             IsDeleted
         )
         VALUES (
             @Id,
-            @CountryName,
-            @CountryCode,
-            @CreatedAt,
-            @UpdatedAt,
-            @CreatedBy,
-            @UpdatedBy,
-            @IsDeleted
+            @ProductBrandId,
+            @ProductTypeId,
+            @Name,
+            @Summary,
+            @Description,
+            @ImageFile,
+            @Price,
+            0
         );
     END
     ELSE
     BEGIN
-        SET IDENTITY_INSERT Country OFF;
-        INSERT INTO Country (
-            CountryName,
-            CountryCode,
-            CreatedAt,
-            UpdatedAt,
-            CreatedBy,
-            UpdatedBy,
-            IsDeleted
-        )
-        VALUES (
-            @CountryName,
-            @CountryCode,
-            @CreatedAt,
-            @UpdatedAt,
-            @CreatedBy,
-            @UpdatedBy,
-            @IsDeleted
-        )
-    
-        SELECT SCOPE_IDENTITY();
+        UPDATE Product 
+        SET 
+            ProductBrandId=@ProductBrandId,
+            ProductTypeId=@ProductTypeId,                        
+            Name=@Name,  
+            Summary=@Summary, 
+            Description=@Description,
+            ImageFile=@ImageFile, 
+            Price=@Price,          
+            IsDeleted=0
 
-    END
+       WHERE Id = @Id;
+
+        SELECT @Id;
+    END;
 END')
 
-EXEC(N'CREATE OR ALTER PROC COUNTRY_INFO_SELECT
+
+
+EXEC(N'
+CREATE OR ALTER PROC PRODUCT_SELECT_BY_ID
 (
- 
-   @CountryName nvarchar(MAX)=NULL,
-   @CountryCode nvarchar(MAX)=NULL
-  
+   @Id BIGINT    
 )
 AS
 BEGIN
+ SELECT * FROM Product WHERE IsDeleted = 0 AND Id=@Id;
+END
+')
 
-SELECT Id FROM Country
-  WHERE IsDeleted = 0 AND (CountryCode=@CountryCode OR CountryName=@CountryName)
-END')
+EXEC(N'
+CREATE OR ALTER PROC PRODUCT_SELECT_BY_BRAND_NAME
+(
+   @Name NVARCHAR(MAX)
+)
+AS
+BEGIN
+  SELECT b.Name 
+    FROM Product AS a
+    INNER JOIN ProductBrand AS b ON a.ProductBrandId = b.Id 
+    WHERE a.IsDeleted = 0 AND b.Name = @Name;
+END
+')
+
+EXEC(N'
+CREATE OR ALTER PROC PRODUCT_SELECT_BY_PRODUCT_NAME
+(
+   @Name NVARCHAR(MAX)   
+)
+AS
+BEGIN
+ SELECT * FROM Product WHERE IsDeleted = 0 AND  Name = @Name;
+END
+')
+
+EXEC(N'
+CREATE OR ALTER PROC PRODUCT_SELECT_ALL
+
+AS
+BEGIN
+ SELECT * FROM Product WHERE IsDeleted=0;
+END
+')
+
+EXEC(N'
+CREATE OR ALTER PROC PRODUCT_BRAND_SELECT_ALL
+
+AS
+BEGIN
+  SELECT * FROM ProductBrand WHERE IsDeleted=0;
+END
+')
+
+EXEC(N'
+CREATE OR ALTER PROC PRODUCT_TYPE_SELECT_ALL
+
+AS
+BEGIN
+ SELECT * FROM ProductType WHERE IsDeleted=0;
+END
+')

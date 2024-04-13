@@ -92,10 +92,7 @@ namespace Catalog.Api.Manager.Implementation
         }
 
         public async Task<dynamic> StoredProcedure()
-        {
-            //var token = _tokenService.GetOAuth2Token("Dg4ODg4ODg4COTgHBTg3ZjYCOzcKOQIJDQwOAg4FBQsCDQcJCTsHCjsKCjs5Ag4FCQwCBgoLDgg=",
-            //                                        "EhISEhISEhIGPjk+Ogw+ZTQGCz8JOQYNDwkQBjoMDw4GDQkPEQoOPQo/Dg0/BhIJDRAGPA0KDBI=", "client_credentials", "http://localhost:7020/autobill/auth");
-
+        {      
             var executionResult = string.Empty;
             var assembly = Assembly.GetExecutingAssembly();
             var sqlFiles = assembly.GetManifestResourceNames().

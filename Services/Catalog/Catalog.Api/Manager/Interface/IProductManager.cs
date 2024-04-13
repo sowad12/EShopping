@@ -5,12 +5,12 @@ namespace Catalog.Api.Manager.Interface
 {
     public interface IProductManager
     {
-        Task<IEnumerable<ProductViewModel>> GetProducts();
+        Task<IEnumerable<ProductViewModel>> GetAllProducts();
         Task<ProductViewModel> GetProduct(long Id);
-        Task<IEnumerable<ProductViewModel>> GetProductByName(string name);
-        Task<IEnumerable<ProductViewModel>> GetProductByBrand(string name);
-        Task<ProductViewModel> CreateProduct(ProductViewModel product);
-        Task<bool> UpdateProduct(ProductViewModel product);
-        Task<bool> DeleteProduct(string id);
+        Task<IEnumerable<ProductViewModel>> GetProductByName(string Name);
+        Task<IEnumerable<ProductViewModel>> GetProductByBrand(string Name);
+        Task<bool> CreateOrUpdate(ProductViewModel product);
+       
+        Task<bool> DeleteProduct(long Id);
     }
 }
