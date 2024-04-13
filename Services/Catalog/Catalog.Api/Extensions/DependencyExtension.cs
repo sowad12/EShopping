@@ -18,6 +18,9 @@ namespace Catalog.Api.Extensions
             services.AddSwaggerService(configuration);
             services.AddMemoryCache();
 
+            services.AddAutoMapper(typeof(Startup));
+            //services.AddMediatR(typeof(CreateProductHandler).GetTypeInfo().Assembly);
+            services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining(typeof(Startup)));
             // Options
             services.AddOptions();
          
