@@ -17,13 +17,9 @@ namespace Catalog.Library.Seeders
             {
                 var seedObjects = new List<ISeeder>()
                 {
-                    //new InfoSeeder(),
-                    //new WebhookSeeder(),
-                    //new ScriptTagSeeder(),
-                    //new WidgetSeeder(),
-                    //new ApiAccessScopeSeeder(),
-                    //new CustomerProfileTabSeeder(),
-                    //new LayoutTemplateSeeder()
+                    new ProductBrandSeeder(),
+                    new ProductTypeSeeder(),
+                    new ProductSeeder(),              
                 };
                 var result = SeederExtensions.IdentitySeedWithTransaction(context, seedObjects);
                 logger?.LogWarning("SEED SUCCESS " + result);

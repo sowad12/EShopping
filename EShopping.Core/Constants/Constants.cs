@@ -2,7 +2,7 @@
 
 namespace EShopping.Core.Constants
 {
-    public class PluginConstants
+    public class Constants
     {
         public static string Success { get; set; } = "success";
         public static string Error { get; set; } = "error";

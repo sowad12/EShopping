@@ -44,11 +44,11 @@ namespace Catalog.Api.Manager.Implementation
             try
             {
                 result = new MainSeeder().Seed(_applicationDbContext, _logger);
-                seederStatus.Status = PluginConstants.Success;
+                seederStatus.Status = Constants.Success;
             }
             catch (Exception ex)
             {
-                seederStatus.Status = PluginConstants.Error;
+                seederStatus.Status = Constants.Error;
                 seederStatus.Exception = ex?.Message;
                 seederStatus.StackTrace = ex?.StackTrace;
                 _logger.LogError("SEED ERROR " + ex?.Message);
