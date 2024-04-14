@@ -18,6 +18,6 @@ namespace EShopping.Core.ViewModels
             };
         }
 
-        public string[] Exceptions { get; set; }
+        //public string[] Exceptions { get; set; }
     }
 }

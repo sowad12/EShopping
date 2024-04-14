@@ -1,9 +1,9 @@
-﻿
-
-using Catalog.Library.Model.Entities;
+﻿using Catalog.Library.Model.Entities;
 using Catalog.Library.Model.ViewModel;
 using Catalog.Repository.Manager.Interface;
 using EShopping.Core.Infrastructure.Interface;
+using EShopping.Core.ViewModels;
+using System.Net;
 
 
 namespace Catalog.Repository.Manager.Implementation
@@ -17,7 +17,7 @@ namespace Catalog.Repository.Manager.Implementation
         }
 
 
-        public async Task<bool> DeleteProduct(long Id)
+        public async Task<ResponseViewModel> DeleteProductById(long Id)
         {
             try
             {
@@ -25,12 +25,18 @@ namespace Catalog.Repository.Manager.Implementation
                 {
                     Id = Id
                 });
-                return result.FirstOrDefault();
+                return new SuccessResponseViewModel()
+                {
+                    Data = "Product Remove Successfully",
+                };
 
             }
             catch (Exception ex)
             {
-                throw ex;
+                return new FailResponseViewModel("Internal server Error", HttpStatusCode.InternalServerError)
+                {
+                    Data = ex.Message,
+                };
             }
         }
 
@@ -38,7 +44,7 @@ namespace Catalog.Repository.Manager.Implementation
         {
             try
             {
-                
+
                 var result = await _dapper.StoredProcedureQueryAsync<ProductViewModel>("PRODUCT_SELECT_BY_ID", new
                 {
                     Id = Id
@@ -103,8 +109,6 @@ namespace Catalog.Repository.Manager.Implementation
             }
         }
 
-
-
         public async Task<IEnumerable<ProductBrandViewModel>> GetAllBrands()
         {
             try
@@ -138,7 +142,7 @@ namespace Catalog.Repository.Manager.Implementation
                 throw ex;
             }
         }
-        public async Task<bool> CreateOrUpdateProduct(ProductViewModel product)
+        public async Task<ResponseViewModel> CreateOrUpdateProduct(ProductViewModel product)
         {
             try
             {
@@ -154,31 +158,43 @@ namespace Catalog.Repository.Manager.Implementation
                     Price = product.Price
 
                 });
-                return result.FirstOrDefault();
+                return new SuccessResponseViewModel()
+                {
+                    Data = product.Id is null ? "Product Created Successfully" : "Product Updated Successfully"
+                };
             }
             catch (Exception ex)
             {
-                throw ex;
+                return new FailResponseViewModel("Internal server Error", HttpStatusCode.InternalServerError)
+                {
+                    Data = ex.Message,
+                };
             }
         }
-        public async Task<long> InsertProductBrand(ProductBrandViewModel productBrandViewModel)
+        public async Task<ResponseViewModel> InsertProductBrand(ProductBrandViewModel productBrandViewModel)
         {
             try
             {
                 var result = await _dapper.StoredProcedureQueryAsync<long>("PRODUCT_BRAND_INSERT", new
-                {             
-                    Name= productBrandViewModel.Name,
+                {
+                    Name = productBrandViewModel.Name,
 
                 });
-                return result.FirstOrDefault();
+                return new SuccessResponseViewModel()
+                {
+                    Data = result.FirstOrDefault(),
+                };
             }
             catch (Exception ex)
             {
-                throw ex;
+                return new FailResponseViewModel("Internal server Error", HttpStatusCode.InternalServerError)
+                {
+                    Data = ex.Message,
+                };
             }
         }
 
-        public async Task<long> InsertProductType(ProductTypeViewModel productTypeViewModel)
+        public async Task<ResponseViewModel> InsertProductType(ProductTypeViewModel productTypeViewModel)
         {
             try
             {
@@ -187,11 +203,17 @@ namespace Catalog.Repository.Manager.Implementation
                     Name = productTypeViewModel.Name,
 
                 });
-                return result.FirstOrDefault();
+                return new SuccessResponseViewModel()
+                {
+                    Data = result.FirstOrDefault(),
+                }; 
             }
             catch (Exception ex)
             {
-                throw ex;
+                return new FailResponseViewModel("Internal server Error", HttpStatusCode.InternalServerError)
+                {
+                    Data = ex.Message,
+                };
             }
         }
     }

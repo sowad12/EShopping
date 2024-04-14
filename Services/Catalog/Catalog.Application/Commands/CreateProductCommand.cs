@@ -1,5 +1,6 @@
 ﻿using Catalog.Library.Model.Entities;
 using Catalog.Library.Model.ViewModel;
+using EShopping.Core.ViewModels;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Catalog.Application.Commands
 {
-    public class CreateProductCommand:IRequest<bool>
+    public class CreateProductCommand:IRequest<ResponseViewModel>
     {
         public CreateProductCommand()
         {

@@ -1,10 +1,11 @@
 ﻿using Catalog.Library.Model.ViewModel;
+using EShopping.Core.ViewModels;
 
 namespace Catalog.Repository.Manager.Interface
 {
     public interface ITypeManager
     {
         Task<IEnumerable<ProductTypeViewModel>> GetAllTypes();
-        Task<long> InsertProductType(ProductTypeViewModel productTypeViewModel);
+        Task<ResponseViewModel> InsertProductType(ProductTypeViewModel productTypeViewModel);
     }
 }
