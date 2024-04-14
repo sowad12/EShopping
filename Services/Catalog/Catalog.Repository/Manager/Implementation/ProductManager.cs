@@ -17,28 +17,7 @@ namespace Catalog.Repository.Manager.Implementation
         }
 
 
-        public async Task<ResponseViewModel> DeleteProductById(long Id)
-        {
-            try
-            {
-                var result = await _dapper.StoredProcedureQueryAsync<bool>("PRODUCT_DELETE_BY_ID", new
-                {
-                    Id = Id
-                });
-                return new SuccessResponseViewModel()
-                {
-                    Data = "Product Remove Successfully",
-                };
-
-            }
-            catch (Exception ex)
-            {
-                return new FailResponseViewModel("Internal server Error", HttpStatusCode.InternalServerError)
-                {
-                    Data = ex.Message,
-                };
-            }
-        }
+    
 
         public async Task<ProductViewModel> GetProduct(long Id)
         {
@@ -189,7 +168,7 @@ namespace Catalog.Repository.Manager.Implementation
             {
                 return new FailResponseViewModel("Internal server Error", HttpStatusCode.InternalServerError)
                 {
-                    Data = ex.Message,
+                    Data = null,
                 };
             }
         }
@@ -212,8 +191,62 @@ namespace Catalog.Repository.Manager.Implementation
             {
                 return new FailResponseViewModel("Internal server Error", HttpStatusCode.InternalServerError)
                 {
+                    Data = null,
+                };
+            }
+        }
+        public async Task<ResponseViewModel> DeleteProductById(long Id)
+        {
+            try
+            {
+                var result = await _dapper.StoredProcedureQueryAsync<bool>("PRODUCT_DELETE_BY_ID", new
+                {
+                    Id = Id
+                });
+                return new SuccessResponseViewModel()
+                {
+                    Data = "Product Remove Successfully",
+                };
+
+            }
+            catch (Exception ex)
+            {
+                return new FailResponseViewModel("Internal server Error", HttpStatusCode.InternalServerError)
+                {
                     Data = ex.Message,
                 };
+            }
+        }
+
+        public async Task<bool> DeleteProductBrandById(long Id)
+        {
+            try
+            {
+                var result = await _dapper.StoredProcedureQueryAsync<bool>("PRODUCT_BRAND_DELETE_BY_ID", new
+                {
+                    Id = Id
+                });
+                return true;
+            }
+            catch(Exception ex)
+            {
+                return false;
+            }
+        }
+
+        public async Task<bool> DeleteProductTypeById(long Id)
+        {
+            try
+            {
+                var result = await _dapper.StoredProcedureQueryAsync<bool>("PRODUCT_TYPE_DELETE_BY_ID", new
+                {
+                    Id = Id
+                });
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
             }
         }
     }

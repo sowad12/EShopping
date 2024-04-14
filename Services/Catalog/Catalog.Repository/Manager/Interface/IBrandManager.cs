@@ -10,5 +10,6 @@ namespace Catalog.Repository.Manager.Interface
     {
         Task<IEnumerable<ProductBrandViewModel>> GetAllBrands();
         Task<ResponseViewModel> InsertProductBrand(ProductBrandViewModel productBrandViewModel);
+        Task<bool> DeleteProductBrandById(long Id);
     }
 }

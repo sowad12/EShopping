@@ -7,5 +7,6 @@ namespace Catalog.Repository.Manager.Interface
     {
         Task<IEnumerable<ProductTypeViewModel>> GetAllTypes();
         Task<ResponseViewModel> InsertProductType(ProductTypeViewModel productTypeViewModel);
+        Task<bool> DeleteProductTypeById(long Id);
     }
 }
