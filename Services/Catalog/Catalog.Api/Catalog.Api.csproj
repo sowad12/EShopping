@@ -28,6 +28,7 @@
 		<ProjectReference Include="..\..\..\EShopping.Utilities\EShopping.Utilities.csproj" />
 		<ProjectReference Include="..\Catalog.Application\Catalog.Application.csproj" />
 		<ProjectReference Include="..\Catalog.Library\Catalog.Library.csproj" />
+		<ProjectReference Include="..\Catalog.Repository\Catalog.Repository.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>

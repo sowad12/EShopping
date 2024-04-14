@@ -1,10 +1,12 @@
-﻿using Catalog.Api.Manager.Interface;
+﻿
+
 using Catalog.Library.Model.Entities;
 using Catalog.Library.Model.ViewModel;
+using Catalog.Repository.Manager.Interface;
 using EShopping.Core.Infrastructure.Interface;
 
 
-namespace Catalog.Api.Manager.Implementation
+namespace Catalog.Repository.Manager.Implementation
 {
     public class ProductManager : IProductManager, IBrandManager, ITypeManager
     {
@@ -13,29 +15,7 @@ namespace Catalog.Api.Manager.Implementation
         {
             _dapper = dapper;
         }
-        public async Task<bool> CreateOrUpdate(ProductViewModel product)
-        {
-            try
-            {
-                var result = await _dapper.StoredProcedureQueryAsync<bool>("PRODUCT_INSERT_OR_UPDATE", new
-                {
-                    Id = product.Id ?? null,
-                    ProductBrandId = product.ProductBrandId,
-                    ProductTypeId = product.ProductTypeId,
-                    Name = product.Name,
-                    Summary = product.Summary,
-                    Description = product.Description,
-                    ImageFile = product.ImageFile,                    
-                    Price = product.Price
 
-                });
-                return result.FirstOrDefault();
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
 
         public async Task<bool> DeleteProduct(long Id)
         {
@@ -53,10 +33,12 @@ namespace Catalog.Api.Manager.Implementation
                 throw ex;
             }
         }
+
         public async Task<ProductViewModel> GetProduct(long Id)
         {
             try
             {
+                
                 var result = await _dapper.StoredProcedureQueryAsync<ProductViewModel>("PRODUCT_SELECT_BY_ID", new
                 {
                     Id = Id
@@ -150,6 +132,62 @@ namespace Catalog.Api.Manager.Implementation
                 });
                 return result;
 
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public async Task<bool> CreateOrUpdateProduct(ProductViewModel product)
+        {
+            try
+            {
+                var result = await _dapper.StoredProcedureQueryAsync<bool>("PRODUCT_INSERT_OR_UPDATE", new
+                {
+                    Id = product.Id ?? null,
+                    ProductBrandId = product.ProductBrandId,
+                    ProductTypeId = product.ProductTypeId,
+                    Name = product.Name,
+                    Summary = product.Summary,
+                    Description = product.Description,
+                    ImageFile = product.ImageFile,
+                    Price = product.Price
+
+                });
+                return result.FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public async Task<bool> InsertProductBrand(ProductBrandViewModel productBrandViewModel)
+        {
+            try
+            {
+                var result = await _dapper.StoredProcedureQueryAsync<bool>("PRODUCT_BRAND_INSERT", new
+                {             
+                    Name= productBrandViewModel.Name,
+
+                });
+                return result.FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public async Task<bool> InsertProductType(ProductTypeViewModel productTypeViewModel)
+        {
+            try
+            {
+                var result = await _dapper.StoredProcedureQueryAsync<bool>("PRODUCT_TYPE_INSERT", new
+                {
+                    Name = productTypeViewModel.Name,
+
+                });
+                return result.FirstOrDefault();
             }
             catch (Exception ex)
             {

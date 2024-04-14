@@ -1,9 +1,6 @@
-﻿//using Microsoft.AspNetCore.Mvc.Versioning;
-
-//using EShopping.Core.Extensions;
-using Catalog.Api.Manager.Interface;
-using Catalog.Api.Manager.Implementation;
-using Catalog.Api.Server.Main;
+﻿using Catalog.Api.Server.Main;
+using Catalog.Repository.Manager.Implementation;
+using Catalog.Repository.Manager.Interface;
 
 namespace Catalog.Api.Extensions
 {
@@ -19,8 +16,9 @@ namespace Catalog.Api.Extensions
             services.AddMemoryCache();
 
             services.AddAutoMapper(typeof(Startup));
-            //services.AddMediatR(typeof(CreateProductHandler).GetTypeInfo().Assembly);
-            services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining(typeof(Startup)));
+
+            //services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining(typeof(Startup)));
+            services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(AppDomain.CurrentDomain.GetAssemblies()));
             // Options
             services.AddOptions();
          

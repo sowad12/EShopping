@@ -1,19 +1,20 @@
-﻿using Catalog.Api.Manager.Interface;
+﻿
 using Catalog.Library.Context;
 using Catalog.Library.Model.Entities;
 using Catalog.Library.Seeders;
+using Catalog.Repository.Manager.Interface;
 using EShopping.Core.Constants;
 using EShopping.Core.Infrastructure.Interface;
 using EShopping.Core.Infrastructure.Options;
 using EShopping.Utilities;
 using Microsoft.EntityFrameworkCore;
-
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System.Reflection;
 
 
 
-namespace Catalog.Api.Manager.Implementation
+namespace Catalog.Repository.Manager.Implementation
 {
     public class SystemManager : ISystemManager
     {

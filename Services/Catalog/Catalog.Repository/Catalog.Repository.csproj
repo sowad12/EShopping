@@ -7,17 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Responses\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="AutoMapper" Version="13.0.1" />
-    <PackageReference Include="MediatR" Version="12.2.0" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <ProjectReference Include="..\..\..\EShopping.Core\EShopping.Core.csproj" />
+    <ProjectReference Include="..\..\..\EShopping.Utilities\EShopping.Utilities.csproj" />
     <ProjectReference Include="..\Catalog.Library\Catalog.Library.csproj" />
-    <ProjectReference Include="..\Catalog.Repository\Catalog.Repository.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,7 +1,7 @@
 ﻿using Catalog.Library.Model.Entities;
 using Catalog.Library.Model.ViewModel;
 
-namespace Catalog.Api.Manager.Interface
+namespace Catalog.Repository.Manager.Interface
 {
     public interface IProductManager
     {
@@ -9,8 +9,7 @@ namespace Catalog.Api.Manager.Interface
         Task<ProductViewModel> GetProduct(long Id);
         Task<IEnumerable<ProductViewModel>> GetProductByName(string Name);
         Task<IEnumerable<ProductViewModel>> GetProductByBrand(string Name);
-        Task<bool> CreateOrUpdate(ProductViewModel product);
-       
+        Task<bool> CreateOrUpdateProduct(ProductViewModel product);
         Task<bool> DeleteProduct(long Id);
     }
 }

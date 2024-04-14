@@ -1,4 +1,5 @@
-﻿using Catalog.Api.Manager.Interface;
+﻿
+using Catalog.Repository.Manager.Interface;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 

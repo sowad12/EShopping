@@ -56,8 +56,76 @@ BEGIN
     END;
 END')
 
+EXEC(N'CREATE OR ALTER PROC PRODUCT_BRAND_INSERT
+(
+   @Id BIGINT=null,      
+   @Name NVARCHAR(MAX)
+  
+)
+AS
+BEGIN
+    SET NOCOUNT ON;
+    IF ISNULL(@Id,0)<=0
+    BEGIN       
+        INSERT INTO ProductBrand (
+            Id,            
+            Name,         
+            IsDeleted
+        )
+        VALUES (
+            @Id,         
+            @Name,       
+            0
+        );
+    END
+    ELSE
+    BEGIN
+        UPDATE ProductBrand 
+        SET                                
+            Name=@Name,                 
+            IsDeleted=0
 
+       WHERE Id = @Id;
 
+        SELECT @Id;
+    END;
+END')
+
+EXEC(N'CREATE OR ALTER PROC PRODUCT_TYPE_INSERT
+(
+   @Id BIGINT=null,      
+   @Name NVARCHAR(MAX)
+  
+)
+AS
+BEGIN
+    SET NOCOUNT ON;
+    IF ISNULL(@Id,0)<=0
+    BEGIN       
+        INSERT INTO ProductType (
+            Id,            
+            Name,         
+            IsDeleted
+        )
+        VALUES (
+            @Id,         
+            @Name,       
+            0
+        );
+    END
+    ELSE
+    BEGIN
+        UPDATE ProductType 
+        SET 
+                                
+            Name=@Name,                 
+            IsDeleted=0
+
+       WHERE Id = @Id;
+
+        SELECT @Id;
+    END;
+END')
 EXEC(N'
 CREATE OR ALTER PROC PRODUCT_SELECT_BY_ID
 (

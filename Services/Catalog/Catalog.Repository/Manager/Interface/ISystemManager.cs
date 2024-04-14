@@ -1,4 +1,4 @@
-﻿namespace Catalog.Api.Manager.Interface
+﻿namespace Catalog.Repository.Manager.Interface
 {
     public interface ISystemManager
     {
