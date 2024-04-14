@@ -8,6 +8,6 @@ namespace Catalog.Repository.Manager.Interface
     public interface IBrandManager
     {
         Task<IEnumerable<ProductBrandViewModel>> GetAllBrands();
-        Task<bool> InsertProductBrand(ProductBrandViewModel productBrandViewModel);
+        Task<long> InsertProductBrand(ProductBrandViewModel productBrandViewModel);
     }
 }

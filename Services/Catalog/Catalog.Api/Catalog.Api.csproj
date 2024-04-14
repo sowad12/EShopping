@@ -30,8 +30,4 @@
 		<ProjectReference Include="..\Catalog.Library\Catalog.Library.csproj" />
 		<ProjectReference Include="..\Catalog.Repository\Catalog.Repository.csproj" />
 	</ItemGroup>
-
-	<ItemGroup>
-		<EmbeddedResource Include="CatalogStoredProcedure.sql" />
-	</ItemGroup>
 </Project>

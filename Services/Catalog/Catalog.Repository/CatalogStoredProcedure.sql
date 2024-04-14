@@ -15,7 +15,7 @@ BEGIN
     IF ISNULL(@Id,0)<=0
     BEGIN       
         INSERT INTO Product (
-            Id,
+           
             ProductBrandId,
             ProductTypeId,
             Name,
@@ -26,7 +26,7 @@ BEGIN
             IsDeleted
         )
         VALUES (
-            @Id,
+           
             @ProductBrandId,
             @ProductTypeId,
             @Name,
@@ -68,15 +68,17 @@ BEGIN
     IF ISNULL(@Id,0)<=0
     BEGIN       
         INSERT INTO ProductBrand (
-            Id,            
+                     
             Name,         
             IsDeleted
         )
         VALUES (
-            @Id,         
+                   
             @Name,       
             0
         );
+
+        SELECT SCOPE_IDENTITY();
     END
     ELSE
     BEGIN
@@ -103,15 +105,16 @@ BEGIN
     IF ISNULL(@Id,0)<=0
     BEGIN       
         INSERT INTO ProductType (
-            Id,            
+                       
             Name,         
             IsDeleted
         )
         VALUES (
-            @Id,         
+                   
             @Name,       
             0
         );
+       SELECT SCOPE_IDENTITY();
     END
     ELSE
     BEGIN

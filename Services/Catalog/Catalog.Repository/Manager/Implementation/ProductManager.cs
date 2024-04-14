@@ -161,11 +161,11 @@ namespace Catalog.Repository.Manager.Implementation
                 throw ex;
             }
         }
-        public async Task<bool> InsertProductBrand(ProductBrandViewModel productBrandViewModel)
+        public async Task<long> InsertProductBrand(ProductBrandViewModel productBrandViewModel)
         {
             try
             {
-                var result = await _dapper.StoredProcedureQueryAsync<bool>("PRODUCT_BRAND_INSERT", new
+                var result = await _dapper.StoredProcedureQueryAsync<long>("PRODUCT_BRAND_INSERT", new
                 {             
                     Name= productBrandViewModel.Name,
 
@@ -178,11 +178,11 @@ namespace Catalog.Repository.Manager.Implementation
             }
         }
 
-        public async Task<bool> InsertProductType(ProductTypeViewModel productTypeViewModel)
+        public async Task<long> InsertProductType(ProductTypeViewModel productTypeViewModel)
         {
             try
             {
-                var result = await _dapper.StoredProcedureQueryAsync<bool>("PRODUCT_TYPE_INSERT", new
+                var result = await _dapper.StoredProcedureQueryAsync<long>("PRODUCT_TYPE_INSERT", new
                 {
                     Name = productTypeViewModel.Name,
 
