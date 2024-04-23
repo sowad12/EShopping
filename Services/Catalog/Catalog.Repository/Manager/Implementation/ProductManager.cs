@@ -19,7 +19,7 @@ namespace Catalog.Repository.Manager.Implementation
 
     
 
-        public async Task<ProductViewModel> GetProduct(long Id)
+        public async Task<ProductViewModel> GetProductById(long Id)
         {
             try
             {

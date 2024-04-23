@@ -1,4 +1,5 @@
 ﻿using Catalog.Library.Model.ViewModel;
+using EShopping.Core.ViewModels;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -8,12 +9,12 @@ using System.Threading.Tasks;
 
 namespace Catalog.Application.Queries
 {
-    public class GetProductByIdQuery:IRequest<IList<ProductViewModel>>
+    public class GetProductByIdQuery:IRequest<ResponseViewModel>
     {
         public long Id { get; set; }
-        public GetProductByIdQuery(long Id)
-        {
-            this.Id = Id;
-        }
+        //public GetProductByIdQuery(long Id)
+        //{
+        //    this.Id = Id;
+        //}
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Catalog.Application.Commands;
+using Catalog.Application.Queries;
 using EShopping.Core.Extensions;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -20,12 +21,25 @@ namespace Catalog.Api.Controllers
         {
             _mediator = mediator;
         }
-        [HttpGet("get-movies")]
-        public async Task<IActionResult> GetMovie()
-        {
-            //var res = await _dbContext.Movie.ToListAsync();
-            return Ok(true);
+        [HttpGet("get-all-movies")]
+        public async Task<IActionResult> GetMovies()
+        {   
+            var result = await _mediator.Send(new GetAllProductsQuery());
+            return Ok(result);
         }
+        //[HttpGet("get-movie/{Id}")]
+        //public async Task<IActionResult> GetMovie([FromRoute] long Id)
+        //{
+        //    var result = await _mediator.Send(new GetProductByIdQuery() { Id = Id });
+        //    return Ok(result);
+        //}
+        [HttpGet("get-movie")]
+        public async Task<IActionResult> GetMovie([FromQuery] GetProductByIdQuery getProductByIdQuery)
+        {
+            var result = await _mediator.Send(getProductByIdQuery);
+            return Ok(result);
+        }
+
         [HttpPost("create-product")]   
         public async Task<IActionResult> CreateProduct([FromBody] CreateProductCommand productCommand)
         {

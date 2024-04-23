@@ -1,4 +1,5 @@
 ﻿using Catalog.Library.Model.ViewModel;
+using EShopping.Core.ViewModels;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Catalog.Application.Queries
 {
-    public class GetAllProductsQuery:IRequest<IList<ProductViewModel>>
+    public class GetAllProductsQuery:IRequest<ResponseViewModel>
     {
     }
 }
