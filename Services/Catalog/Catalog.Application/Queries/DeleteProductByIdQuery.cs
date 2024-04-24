@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using EShopping.Core.ViewModels;
+using MediatR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Catalog.Application.Queries
 {
-    public class DeleteProductByIdQuery:IRequest<bool>
+    public class DeleteProductByIdQuery:IRequest<ResponseViewModel>
     {
 
         public long Id {  get; set; }
