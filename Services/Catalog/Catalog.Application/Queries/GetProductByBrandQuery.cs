@@ -12,9 +12,9 @@ namespace Catalog.Application.Queries
     public class GetProductByBrandQuery:IRequest<ResponseViewModel>
     {
         public string Brandname { get; set; }
-        public GetProductByBrandQuery(string Brandname)
-        {
-            this.Brandname = Brandname;
-        }
+        //public GetProductByBrandQuery(string Brandname)
+        //{
+        //    this.Brandname = Brandname;
+        //}
     }
 }
