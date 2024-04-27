@@ -66,11 +66,9 @@ namespace Catalog.Application.Handlers
                     };
                 }
 
-                ProductBrandId = ProductBrandRes.Data;
-                ProductTypeId = ProductTypeRes.Data;
-
-                ReqProductData.ProductBrandId = ProductBrandId;
-                ReqProductData.ProductTypeId = ProductTypeId;
+          
+                ReqProductData.ProductBrandId = ProductBrandRes.Data;
+                ReqProductData.ProductTypeId = ProductTypeRes.Data;
 
                 var res = await _productManager.CreateOrUpdateProduct(ReqProductData);
 

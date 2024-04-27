@@ -37,7 +37,7 @@ namespace Catalog.Repository.Manager.Implementation
             }
         }
 
-        public async Task<IEnumerable<ProductViewModel>> GetProductByBrand(string Name)
+        public async Task<ProductViewModel> GetProductByBrand(string Name)
         {
             try
             {
@@ -45,7 +45,7 @@ namespace Catalog.Repository.Manager.Implementation
                 {
                     Name = Name
                 });
-                return result;
+                return result.FirstOrDefault();
 
             }
             catch (Exception ex)
@@ -54,7 +54,7 @@ namespace Catalog.Repository.Manager.Implementation
             }
         }
 
-        public async Task<IEnumerable<ProductViewModel>> GetProductByName(string Name)
+        public async Task<ProductViewModel> GetProductByName(string Name)
         {
             try
             {
@@ -62,7 +62,7 @@ namespace Catalog.Repository.Manager.Implementation
                 {
                     Name = Name
                 });
-                return result;
+                return result.FirstOrDefault();
 
             }
             catch (Exception ex)

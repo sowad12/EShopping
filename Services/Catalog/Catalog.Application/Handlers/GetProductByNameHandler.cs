@@ -22,7 +22,7 @@ namespace Catalog.Application.Handlers
         {
             try
             {
-                var res = _productManager.GetProductByName(request.Name);
+                var res = await _productManager.GetProductByName(request.Name);
                 return new SuccessResponseViewModel()
                 {
                     Data = res

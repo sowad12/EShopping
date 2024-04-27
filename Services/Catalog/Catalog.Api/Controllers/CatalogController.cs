@@ -21,6 +21,14 @@ namespace Catalog.Api.Controllers
         {
             _mediator = mediator;
         }
+
+        [HttpPost("create-product")]
+        public async Task<IActionResult> CreateProduct([FromBody] CreateProductCommand productCommand)
+        {
+            var result = await _mediator.Send(productCommand);
+            return Ok(result);
+        }
+
         [HttpGet("get-all-products")]
         public async Task<IActionResult> GetProducts()
         {   
@@ -66,11 +74,6 @@ namespace Catalog.Api.Controllers
             return Ok(result);
         }
 
-        [HttpPost("create-product")]   
-        public async Task<IActionResult> CreateProduct([FromBody] CreateProductCommand productCommand)
-        {
-            var result = await _mediator.Send(productCommand);
-            return Ok(result);
-        }
+       
     }
 }

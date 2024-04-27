@@ -23,7 +23,7 @@ namespace Catalog.Application.Handlers
         {
             try
             {
-                var res = _productManager.GetProductByBrand(request.Brandname);
+                var res = await _productManager.GetProductByBrand(request.Brandname);
 
                 return new SuccessResponseViewModel()
                 {

@@ -8,8 +8,8 @@ namespace Catalog.Repository.Manager.Interface
     {
         Task<IEnumerable<ProductViewModel>> GetAllProducts();
         Task<ProductViewModel> GetProductById(long Id);
-        Task<IEnumerable<ProductViewModel>> GetProductByName(string Name);
-        Task<IEnumerable<ProductViewModel>> GetProductByBrand(string Name);
+        Task<ProductViewModel> GetProductByName(string Name);
+        Task<ProductViewModel> GetProductByBrand(string Name);
         Task<ResponseViewModel> CreateOrUpdateProduct(ProductViewModel product);
         Task<ResponseViewModel> DeleteProductById(long Id);
     }

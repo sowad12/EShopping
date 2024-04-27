@@ -147,10 +147,10 @@ CREATE OR ALTER PROC PRODUCT_SELECT_BY_BRAND_NAME
 )
 AS
 BEGIN
-  SELECT b.Name 
+  SELECT a.*
     FROM Product AS a
     INNER JOIN ProductBrand AS b ON a.ProductBrandId = b.Id 
-    WHERE a.IsDeleted = 0 AND b.Name = @Name;
+    WHERE a.IsDeleted = 0 AND b.Name LIKE ''%'' + @Name + ''%'';
 END
 ')
 
@@ -161,9 +161,10 @@ CREATE OR ALTER PROC PRODUCT_SELECT_BY_PRODUCT_NAME
 )
 AS
 BEGIN
- SELECT * FROM Product WHERE IsDeleted = 0 AND  Name = @Name;
+ SELECT * FROM Product WHERE IsDeleted = 0 AND  Name LIKE ''%'' + @Name + ''%'';
 END
 ')
+
 
 EXEC(N'
 CREATE OR ALTER PROC PRODUCT_SELECT_ALL
