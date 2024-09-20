@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace EShopping.Core.ViewModels
 {
-    public class FailResponseViewModel : ResponseViewModel
+    public class CustomExceptionViewModel : FailResponseViewModel
     {
-        public FailResponseViewModel(string message = "error", HttpStatusCode code = HttpStatusCode.NoContent)
+        public CustomExceptionViewModel(string message = "error", HttpStatusCode code = HttpStatusCode.BadRequest)
         {
             Status = new StatusViewModel
             {
@@ -18,6 +18,5 @@ namespace EShopping.Core.ViewModels
             };
         }
 
-        public string[] Exceptions { get; set; }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Catalog.Api.Server.Main;
 using Catalog.Repository.Manager.Implementation;
 using Catalog.Repository.Manager.Interface;
+using EShopping.Core.Middleware;
 
 namespace Catalog.Api.Extensions
 {
@@ -51,7 +52,8 @@ namespace Catalog.Api.Extensions
             IServiceProvider serviceProvider
         )
         {
-      
+
+            app.UseMiddleware<GlobalExceptionHandlingMiddleware>();
 
             app.UseSwaggerService();
          

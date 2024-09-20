@@ -25,55 +25,50 @@ namespace Catalog.Api.Controllers
         [HttpPost("create-product")]
         public async Task<IActionResult> CreateProduct([FromBody] CreateProductCommand productCommand)
         {
-            var result = await _mediator.Send(productCommand);
+            var result = await _mediator.Send(productCommand).AsCreated();
             return Ok(result);
         }
 
         [HttpGet("get-all-products")]
         public async Task<IActionResult> GetProducts()
-        {   
-            var result = await _mediator.Send(new GetAllProductsQuery());
+        {
+            var result = await _mediator.Send(new GetAllProductsQuery()).AsSuccess();
             return Ok(result);
         }
-        //[HttpGet("get-movie/{Id}")]
-        //public async Task<IActionResult> GetMovie([FromRoute] long Id)
-        //{
-        //    var result = await _mediator.Send(new GetProductByIdQuery() { Id = Id });
-        //    return Ok(result);
-        //}
+
         [HttpGet("get-product")]
         public async Task<IActionResult> GetProduct([FromQuery] GetProductByIdQuery getProductByIdQuery)
         {
-            var result = await _mediator.Send(getProductByIdQuery);
+            var result = await _mediator.Send(getProductByIdQuery).AsSuccess();
             return Ok(result);
         }
 
         [HttpGet("get-all-brands")]
         public async Task<IActionResult> GetAllBrands()
         {
-            var result = await _mediator.Send(new GetAllBrandsQuery());
+            var result = await _mediator.Send(new GetAllBrandsQuery()).AsSuccess();
             return Ok(result);
         }
 
         [HttpGet("get-all-types")]
         public async Task<IActionResult> GetAllTypes()
         {
-            var result = await _mediator.Send(new GetAllTypesQuery());
+            var result = await _mediator.Send(new GetAllTypesQuery()).AsSuccess();
             return Ok(result);
         }
         [HttpGet("get-product-by-name")]
-        public async Task<IActionResult> GetProductByName([FromQuery]string Name)
+        public async Task<IActionResult> GetProductByName([FromQuery] string Name)
         {
-            var result = await _mediator.Send(new GetProductByNameQuery() { Name=Name});
+            var result = await _mediator.Send(new GetProductByNameQuery() { Name = Name }).AsSuccess();
             return Ok(result);
         }
         [HttpGet("get-product-by-brand-name")]
         public async Task<IActionResult> GetProductByBrandName([FromQuery] string Brandname)
         {
-            var result = await _mediator.Send(new GetProductByBrandQuery() { Brandname = Brandname });
+            var result = await _mediator.Send(new GetProductByBrandQuery() { Brandname = Brandname }).AsSuccess();
             return Ok(result);
         }
 
-       
+
     }
 }
