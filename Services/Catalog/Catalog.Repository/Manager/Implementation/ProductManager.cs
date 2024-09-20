@@ -17,7 +17,7 @@ namespace Catalog.Repository.Manager.Implementation
         }
 
 
-    
+
 
         public async Task<ProductViewModel> GetProductById(long Id)
         {
@@ -121,7 +121,7 @@ namespace Catalog.Repository.Manager.Implementation
                 throw ex;
             }
         }
-        public async Task<ResponseViewModel> CreateOrUpdateProduct(ProductViewModel product)
+        public async Task<string> CreateOrUpdateProduct(ProductViewModel product)
         {
             try
             {
@@ -137,17 +137,12 @@ namespace Catalog.Repository.Manager.Implementation
                     Price = product.Price
 
                 });
-                return new SuccessResponseViewModel()
-                {
-                    Data = product.Id is null ? "Product Created Successfully" : "Product Updated Successfully"
-                };
+                return product.Id is null ? "Product Created Successfully" : "Product Updated Successfully";
+
             }
             catch (Exception ex)
             {
-                return new FailResponseViewModel("Internal server Error", HttpStatusCode.InternalServerError)
-                {
-                    Data = ex.Message,
-                };
+                throw ex;
             }
         }
         public async Task<ResponseViewModel> InsertProductBrand(ProductBrandViewModel productBrandViewModel)
@@ -185,7 +180,7 @@ namespace Catalog.Repository.Manager.Implementation
                 return new SuccessResponseViewModel()
                 {
                     Data = result.FirstOrDefault(),
-                }; 
+                };
             }
             catch (Exception ex)
             {
@@ -228,7 +223,7 @@ namespace Catalog.Repository.Manager.Implementation
                 });
                 return true;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return false;
             }

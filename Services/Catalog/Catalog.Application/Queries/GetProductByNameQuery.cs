@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Catalog.Application.Queries
 {
-    public class GetProductByNameQuery:IRequest<ResponseViewModel>
+    public class GetProductByNameQuery:IRequest<ProductViewModel>
     {
         public string Name {  get; set; }
         //public GetProductByNameQuery(string Name)

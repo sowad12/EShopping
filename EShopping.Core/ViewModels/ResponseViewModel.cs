@@ -13,6 +13,8 @@ namespace EShopping.Core.ViewModels
         public StatusViewModel Status { get; set; }
     }
 
+
+
     public class StatusViewModel
     {
         public HttpStatusCode Code { get; set; }

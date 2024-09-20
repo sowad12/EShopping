@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Catalog.Application.Queries
 {
-    public class GetAllTypesQuery:IRequest<ResponseViewModel>
+    public class GetAllTypesQuery:IRequest<IEnumerable<ProductTypeViewModel>>
     {
     }
 }

@@ -1,6 +1,8 @@
 ﻿using Catalog.Application.Commands;
 using Catalog.Application.Queries;
 using EShopping.Core.Extensions;
+using EShopping.Utilities.Pagination;
+using EShopping.Utilities.Sort;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -30,9 +32,9 @@ namespace Catalog.Api.Controllers
         }
 
         [HttpGet("get-all-products")]
-        public async Task<IActionResult> GetProducts()
+        public async Task<IActionResult> GetProducts([FromQuery] PagingOptions pagingOptions, [FromQuery] SortOptions sortOptions)
         {
-            var result = await _mediator.Send(new GetAllProductsQuery()).AsSuccess();
+            var result = await _mediator.Send(new GetAllProductsQuery() { pagingOptions= pagingOptions, sortOptions=sortOptions }).AsSuccess();
             return Ok(result);
         }
 

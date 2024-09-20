@@ -1,4 +1,5 @@
 ﻿using Catalog.Application.Queries;
+using Catalog.Library.Model.ViewModel;
 using Catalog.Repository.Manager.Interface;
 using EShopping.Core.ViewModels;
 using MediatR;
@@ -11,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Catalog.Application.Handlers
 {
-    public class GetAllBrandsHandler : IRequestHandler<GetAllBrandsQuery, ResponseViewModel>
+    public class GetAllBrandsHandler : IRequestHandler<GetAllBrandsQuery, IEnumerable<ProductBrandViewModel>>
     {
         private readonly IBrandManager _brandManager;
         public GetAllBrandsHandler(IBrandManager brandManager)
@@ -20,22 +21,16 @@ namespace Catalog.Application.Handlers
 
         }
 
-        public async Task<ResponseViewModel> Handle(GetAllBrandsQuery request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<ProductBrandViewModel>> Handle(GetAllBrandsQuery request, CancellationToken cancellationToken)
         {
             try
             {
                 var res = await _brandManager.GetAllBrands();
-                return new SuccessResponseViewModel()
-                {
-                    Data = res
-                };
+                return res;
             }
             catch (Exception ex)
             {
-                return new FailResponseViewModel("Internal server Error", HttpStatusCode.InternalServerError)
-                {
-                    Data = ex.Message,
-                };
+                throw ex;
             }
             
            

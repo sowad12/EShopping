@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Catalog.Application.Commands
 {
-    public class CreateProductCommand:IRequest<ResponseViewModel>
+    public class CreateProductCommand:IRequest<string>
     {
         public CreateProductCommand()
         {

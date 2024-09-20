@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Catalog.Application.Queries
 {
-    public class GetProductByIdQuery:IRequest<ResponseViewModel>
+    public class GetProductByIdQuery:IRequest<ProductViewModel>
     {
         public long Id { get; set; }
         //public GetProductByIdQuery(long Id)

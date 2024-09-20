@@ -10,7 +10,7 @@ namespace Catalog.Repository.Manager.Interface
         Task<ProductViewModel> GetProductById(long Id);
         Task<ProductViewModel> GetProductByName(string Name);
         Task<ProductViewModel> GetProductByBrand(string Name);
-        Task<ResponseViewModel> CreateOrUpdateProduct(ProductViewModel product);
+        Task<string> CreateOrUpdateProduct(ProductViewModel product);
         Task<ResponseViewModel> DeleteProductById(long Id);
     }
 }
