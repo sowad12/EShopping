@@ -2,6 +2,6 @@
 {
     public class SortOptions : ISortOptions
     {
-        public string[] OrderBy { get; set; }
+        public string[]? OrderBy { get; set; }
     }
 }

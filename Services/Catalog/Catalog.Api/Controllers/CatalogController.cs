@@ -32,9 +32,11 @@ namespace Catalog.Api.Controllers
         }
 
         [HttpGet("get-all-products")]
-        public async Task<IActionResult> GetProducts([FromQuery] PagingOptions pagingOptions, [FromQuery] SortOptions sortOptions)
+        public async Task<IActionResult> GetProducts([FromQuery] GetAllProductsQuery query)
         {
-            var result = await _mediator.Send(new GetAllProductsQuery() { pagingOptions= pagingOptions, sortOptions=sortOptions }).AsSuccess();
+            //query.pagingOptions ??= pagingOptions;
+            //query.sortOptions = sortOptions;
+            var result = await _mediator.Send(query).AsSuccess();
             return Ok(result);
         }
 

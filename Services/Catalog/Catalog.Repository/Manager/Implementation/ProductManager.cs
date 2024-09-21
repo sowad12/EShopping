@@ -1,8 +1,11 @@
-﻿using Catalog.Library.Model.Entities;
+﻿
+using Azure.Core;
+using Catalog.Library.Model.Entities;
 using Catalog.Library.Model.ViewModel;
 using Catalog.Repository.Manager.Interface;
 using EShopping.Core.Infrastructure.Interface;
 using EShopping.Core.ViewModels;
+using MediatR;
 using System.Net;
 
 
@@ -71,13 +74,31 @@ namespace Catalog.Repository.Manager.Implementation
             }
         }
 
-        public async Task<IEnumerable<ProductViewModel>> GetAllProducts()
+        public async Task<IEnumerable<ProductViewModel>> GetAllProducts(GetAllProductViewModel query)
         {
             try
             {
+
+                string orderBy = "01";
+                if (query.sortOptions is not null && query.sortOptions.OrderBy is not null)
+                {
+                    if (query.sortOptions.OrderBy.FirstOrDefault() == "name asc")
+                        orderBy = "10";
+                    if (query.sortOptions.OrderBy.FirstOrDefault() == "name desc")
+                        orderBy = "11";
+
+                    //if (query.sortOptions.OrderBy.FirstOrDefault() == "subscriberStatus asc")
+                    //    orderBy = "20";
+                    //if (query.sortOptions.OrderBy.FirstOrDefault() == "subscriberStatus desc")
+                    //    orderBy = "21";
+                }
                 var result = await _dapper.StoredProcedureQueryAsync<ProductViewModel>("PRODUCT_SELECT_ALL", new
                 {
-
+                    
+                    SearchQuery = !string.IsNullOrEmpty(query.SearchQuery) ? query.SearchQuery.ToLower().Trim() : "",
+                    StartRow = query.pagingOptions is null ? 0 : query.pagingOptions.Offset,
+                    EndRow = query.pagingOptions is null?0: query.pagingOptions.Limit,
+                    OrderBy= orderBy
                 });
                 return result;
 

@@ -168,10 +168,37 @@ END
 
 EXEC(N'
 CREATE OR ALTER PROC PRODUCT_SELECT_ALL
-
+(
+ @SearchQuery VARCHAR(MAX)=NULL,
+ @StartRow INT=0,
+ @EndRow INT=0,
+ @OrderBy VARCHAR(MAX)=NULL
+)
 AS
 BEGIN
- SELECT * FROM Product WHERE IsDeleted=0;
+SELECT * FROM
+(
+    SELECT W.*,
+        ROW_NUMBER() OVER (
+         ORDER BY 
+                CASE WHEN @OrderBy IS NULL THEN W.CreatedAt END DESC,
+                CASE WHEN @OrderBy =''01'' THEN W.CreatedAt END DESC,
+                CASE WHEN @OrderBy = ''10'' THEN W.Name END ASC,
+                CASE WHEN @OrderBy = ''11'' THEN W.Name END DESC
+                --CASE WHEN @OrderBy = ''20'' THEN W.SubscriberStatus END ASC,
+                --CASE WHEN @OrderBy = ''21'' THEN W.SubscriberStatus END DESC
+        ) SL
+     FROM
+     (
+         SELECT COUNT(*) OVER () TotalRow,       
+           * FROM Product 
+         WHERE 0=0
+         AND IsDeleted=0
+         AND CASE WHEN @SearchQuery IS NULL THEN 1 WHEN @SearchQuery='''' THEN 1 WHEN Name LIKE ''%''+@SearchQuery+''%'' THEN 1 ELSE 0 END =1
+     )W
+ )TBL
+ WHERE 0=0
+ AND CASE WHEN @EndRow IS NULL THEN 1 WHEN @EndRow=0 THEN 1 WHEN TBL.SL BETWEEN (@StartRow+1) AND (@StartRow+@EndRow) THEN 1 ELSE 0 END =1
 END
 ')
 

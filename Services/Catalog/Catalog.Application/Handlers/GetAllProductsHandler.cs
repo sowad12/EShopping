@@ -1,14 +1,9 @@
 ﻿using Catalog.Application.Queries;
 using Catalog.Library.Model.ViewModel;
 using Catalog.Repository.Manager.Interface;
-using EShopping.Core.ViewModels;
+
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Catalog.Application.Handlers
 {
@@ -19,11 +14,15 @@ namespace Catalog.Application.Handlers
         {
             _productManager = productManager;
         }
-        public async Task<IEnumerable<ProductViewModel>> Handle(GetAllProductsQuery request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<ProductViewModel>> Handle(GetAllProductsQuery query, CancellationToken cancellationToken)
         {
             try
             {
-                var data = await _productManager.GetAllProducts();
+                GetAllProductViewModel getAllProductViewModel=new GetAllProductViewModel();
+                getAllProductViewModel.SearchQuery=query.SearchQuery;
+                getAllProductViewModel.pagingOptions=query.pagingOptions;   
+                getAllProductViewModel.sortOptions=query.sortOptions;
+                var data = await _productManager.GetAllProducts(getAllProductViewModel);
                 return data;
             }
             catch (Exception ex)
