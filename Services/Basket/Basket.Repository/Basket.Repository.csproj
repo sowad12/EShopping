@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Basket.Library\Basket.Library.csproj" />
+  </ItemGroup>
+
 </Project>

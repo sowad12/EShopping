@@ -1,4 +1,6 @@
 ﻿
+using Basket.Repository.Manager.Implementation;
+using Basket.Repository.Manager.Interface;
 using EShopping.Core.Middleware;
 
 namespace Basket.Api.Extensions
@@ -23,15 +25,15 @@ namespace Basket.Api.Extensions
          
 
             // Add Database Context
-            services.AddDatabaseContextService(configuration, logger);
+            //services.AddDatabaseContextService(configuration, logger);
             services.AddScoped<ISession>(provider =>
             provider
                 .GetRequiredService<IHttpContextAccessor>()
                 .HttpContext
                 .Session);
-           
 
-          
+
+            services.AddScoped<IBasketManager, BasketManager>();
 
 
         
