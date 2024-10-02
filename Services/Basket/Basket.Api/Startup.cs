@@ -1,6 +1,7 @@
 ﻿
 
 using Basket.Api.Extensions;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Basket.Api
 {
@@ -15,6 +16,9 @@ namespace Basket.Api
             public void ConfigureServices(IServiceCollection services)
             {
                 services.AddControllers();
+
+               // services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(AppDomain.CurrentDomain.GetAssemblies()));
+               //services.AddMediatR(AppDomain.CurrentDomain.GetAssemblies());
 
                 services.AddDependencies(Configuration);
             }

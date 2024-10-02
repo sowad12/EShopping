@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Basket.Application.Queries
 {
-    public class DeleteBasketByNameQuery:IRequest<Unit>
+    public class DeleteBasketByNameQuery:IRequest<string>
     {
         public string Name { get; set; }
     }

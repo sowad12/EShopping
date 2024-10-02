@@ -13,13 +13,13 @@ namespace Basket.Api.Controllers
     [Route("api/v{version:apiVersion}/[controller]")]
     public class BasketController : ControllerBase
     {
-        private readonly IMediator _mediator;
+        private  IMediator _mediator;
         public BasketController(IMediator mediator)
         {
             _mediator = mediator;
         }
         [HttpPost("update-cart")]
-        public async Task<IActionResult> UpdateCart(UpdateCartCommand updateCartCommand)
+        public async Task<IActionResult> UpdateCart([FromBody]UpdateCartCommand updateCartCommand)
         {
             var result = await _mediator.Send(updateCartCommand).AsUpdated();
             return Ok(result);

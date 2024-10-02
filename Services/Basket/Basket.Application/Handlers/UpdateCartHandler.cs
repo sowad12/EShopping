@@ -22,6 +22,7 @@ namespace Basket.Application.Handlers
             var res = await _basketManager.UpdateBasket(new ShoppingCart()
             {
                 Name=request.Name,
+                Items=request.Items
             });
             return res;          
         }
