@@ -1,15 +1,15 @@
 {
   "profiles": {
-    "http": {
-      "commandName": "Project",
-      "launchBrowser": true,
-      "launchUrl": "swagger",
-      "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
-      },
-      "dotnetRunMessages": true,
-      "applicationUrl": "http://localhost:5295"
-    },
+    //"http": {
+    //  "commandName": "Project",
+    //  "launchBrowser": true,
+    //  "launchUrl": "swagger",
+    //  "environmentVariables": {
+    //    "ASPNETCORE_ENVIRONMENT": "Development"
+    //  },
+    //  "dotnetRunMessages": true,
+    //  "applicationUrl": "http://localhost:5295"
+    //},
     "Discount.Api": {
       "commandName": "Project",
       "launchBrowser": true,
@@ -17,7 +17,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
       "dotnetRunMessages": true,
-      "applicationUrl": "https://localhost:9003"
+      "applicationUrl": "https://localhost:9004"
     },
     "IIS Express": {
       "commandName": "IISExpress",
