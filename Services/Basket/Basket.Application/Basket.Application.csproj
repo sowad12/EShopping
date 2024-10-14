@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="13.0.1" />
+    <PackageReference Include="Grpc.AspNetCore" Version="2.66.0" />
     <PackageReference Include="MediatR" Version="12.4.1" />
   </ItemGroup>
 
@@ -20,5 +21,11 @@
     <ProjectReference Include="..\Basket.Library\Basket.Library.csproj" />
     <ProjectReference Include="..\Basket.Repository\Basket.Repository.csproj" />
   </ItemGroup>
+	
+<ItemGroup>
+	<Protobuf Include="..\..\Discount\Discount.Application\Protos\discount.proto" GrpcServices="Client">
+		<Link>Protos\discount.proto</Link>
+	</Protobuf>
+</ItemGroup>	
 
 </Project>

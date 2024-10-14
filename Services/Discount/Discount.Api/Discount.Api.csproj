@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
@@ -26,6 +26,10 @@
     <ProjectReference Include="..\Discount.Application\Discount.Application.csproj" />   
     <ProjectReference Include="..\Discount.Library\Discount.Library.csproj" />
     <ProjectReference Include="..\Discount.Repository\Discount.Repository.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Controllers\" />
   </ItemGroup>
 
 </Project>

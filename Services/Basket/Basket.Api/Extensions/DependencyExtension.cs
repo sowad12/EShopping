@@ -39,8 +39,8 @@ namespace Basket.Api.Extensions
 
              services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(
              typeof(UpdateCartCommand).Assembly,
-             typeof(UpdateCartHandler).Assembly
-         ));
+             typeof(UpdateCartHandler).Assembly));
+
 
             // Options
             services.AddOptions();

@@ -1,5 +1,5 @@
-﻿
-
+﻿using Discount.Application.Commands;
+using Discount.Application.Handlers;
 using Discount.Repository.Implementation;
 using Discount.Repository.Interface;
 using EShopping.Core.Middleware;
@@ -20,10 +20,13 @@ namespace Discount.Api.Extensions
             services.AddAutoMapper(typeof(Startup));
 
             //services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining(typeof(Startup)));
-            services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(AppDomain.CurrentDomain.GetAssemblies()));
+            //services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(AppDomain.CurrentDomain.GetAssemblies()));
+            services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(
+           typeof(CreateDiscountCommand).Assembly,
+           typeof(CreateDiscountHandler).Assembly));
             // Options
             services.AddOptions();
-         
+            services.AddGrpc();
 
             // Add Database Context
             services.AddDiscountDatabaseContextService(configuration, logger);
@@ -37,7 +40,7 @@ namespace Discount.Api.Extensions
             services.AddScoped<IDiscountManager, DiscountManager>();
 
 
-        
+
             return services;
         }
 
@@ -53,13 +56,13 @@ namespace Discount.Api.Extensions
             app.UseMiddleware<GlobalExceptionHandlingMiddleware>();
 
             app.UseSwaggerService();
-         
+
 
             app.UseHttpsRedirection();
 
             app.UseRouting();
 
-            
+
             app.UseAuthentication();
 
             app.UseAuthorization();

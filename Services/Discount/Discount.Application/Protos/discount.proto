@@ -28,7 +28,7 @@ message UpdateDiscountRequest {
 }
 
 message DeleteDiscountRequest {
-  string productName = 1;
+  int32 id = 1;
 }
 
 message DeleteDiscountResponse {
