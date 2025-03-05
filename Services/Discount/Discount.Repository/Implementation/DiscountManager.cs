@@ -23,11 +23,11 @@ namespace Discount.Repository.Implementation
 
         }
 
-        public async Task<bool> DeleteDiscount(int id)
+        public async Task<bool> DeleteDiscount(string ProductName)
         {
             try
             {
-                var coupon = await _dbContext.Coupons.FirstOrDefaultAsync(x => x.Id == id);
+                var coupon = await _dbContext.Coupons.FirstOrDefaultAsync(x => x.ProductName == ProductName);
                 if (coupon != null)
                 {
                     _dbContext.Coupons.Remove(coupon);
@@ -41,9 +41,9 @@ namespace Discount.Repository.Implementation
             }
         }
 
-        public async Task<Coupon> GetDiscount(int id)
+        public async Task<Coupon> GetDiscount(string ProductName)
         {
-            var coupon = await _dbContext.Coupons.FirstOrDefaultAsync(x => x.Id == id);
+            var coupon = await _dbContext.Coupons.FirstOrDefaultAsync(x => x.ProductName == ProductName);
             return coupon;
 
         }

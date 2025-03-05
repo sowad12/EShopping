@@ -15,7 +15,7 @@ namespace Discount.Application.Handlers
         }
         public async Task<CouponModel> Handle(GetDiscountQuery request, CancellationToken cancellationToken)
         {
-            var res=await _discountManager.GetDiscount(request.Id);
+            var res=await _discountManager.GetDiscount(request.ProductName);
             if(res is  null) throw new CustomException("Discount with product not found",System.Net.HttpStatusCode.NotFound);
 
            var couponModel=new CouponModel()

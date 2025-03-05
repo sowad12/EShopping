@@ -1,4 +1,5 @@
 ﻿using Basket.Application.Commands;
+using Basket.Application.GrpcService;
 using Basket.Library.Model.Entities;
 using Basket.Repository.Manager.Interface;
 using MediatR;
@@ -13,12 +14,19 @@ namespace Basket.Application.Handlers
     public class UpdateCartHandler : IRequestHandler<UpdateCartCommand, ShoppingCart>
     {
         public readonly IBasketManager _basketManager;
-        public UpdateCartHandler(IBasketManager basketManager)
+        private readonly DiscountGrpcService _discountGrpcService;
+        public UpdateCartHandler(IBasketManager basketManager, DiscountGrpcService discountGrpcService)
         {
             _basketManager= basketManager;
+            _discountGrpcService= discountGrpcService;
         }
         public async Task<ShoppingCart> Handle(UpdateCartCommand request, CancellationToken cancellationToken)
         {
+            foreach (var item in request.Items)
+            {
+                var coupon = await _discountGrpcService.GetDiscount(item.ProductName);
+                item.Price -= coupon.Amount;
+            }
             var res = await _basketManager.UpdateBasket(new ShoppingCart()
             {
                 Name=request.Name,

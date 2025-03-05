@@ -34,8 +34,6 @@ namespace Catalog.Api.Controllers
         [HttpGet("get-all-products")]
         public async Task<IActionResult> GetProducts([FromQuery] GetAllProductsQuery query)
         {
-            //query.pagingOptions ??= pagingOptions;
-            //query.sortOptions = sortOptions;
             var result = await _mediator.Send(query).AsSuccess();
             return Ok(result);
         }
@@ -72,7 +70,6 @@ namespace Catalog.Api.Controllers
             var result = await _mediator.Send(new GetProductByBrandQuery() { Brandname = Brandname }).AsSuccess();
             return Ok(result);
         }
-
 
     }
 }

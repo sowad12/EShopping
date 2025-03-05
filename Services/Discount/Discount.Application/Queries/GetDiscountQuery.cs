@@ -10,6 +10,6 @@ namespace Discount.Application.Queries
 {
     public class GetDiscountQuery:IRequest<CouponModel>
     {
-        public int Id { get; set; }
+        public string ProductName { get; set; }
     }
 }

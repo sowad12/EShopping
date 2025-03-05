@@ -1,0 +1,28 @@
+# version: '3.4'
+
+# services:
+#   catalogdb:
+#     container_name: catalogdb
+#     environment:
+#       - ACCEPT_EULA=Y
+#       - MSSQL_SA_PASSWORD=ewww@20230302   
+#     restart: always
+#     ports:
+#         - "1501:1433"
+#     # volumes:
+#     #   - sqlserver_data:/var/opt/mssql 
+#     networks:
+#       - eshopping_network 
+
+#   catalog.api:
+#     container_name: catalog_api
+#     environment:
+#       - ASPNETCORE_ENVIRONMENT=Development
+#       - ConnectionStrings__DefaultConnection=Server=catalogdb,1433; Database=CatalogService; User Id=sa; Password=ewww@20230302; TrustServerCertificate=True;
+#     depends_on:
+#       - catalogdb
+#       # - rabbitmq
+#     ports:
+#       - "6001:8080"
+#     networks:
+#       - eshopping_network 

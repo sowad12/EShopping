@@ -57,18 +57,11 @@ namespace Catalog.Application.Handlers
 
                 }
 
-
                 ReqProductData.ProductBrandId = ProductBrandRes.Data;
                 ReqProductData.ProductTypeId = ProductTypeRes.Data;
 
                 var res = await _productManager.CreateOrUpdateProduct(ReqProductData);
-
-                //if (!res.Status.Message.Contains("success"))
-                //{
-                //    var ProductBrandDel = await _brandManager.DeleteProductBrandById(ProductBrandId);
-                //    var ProductTypeDel = await _typeManager.DeleteProductTypeById(ProductTypeId);
-                //}
-
+             
                 return res;
             }
             catch (CustomException ex)

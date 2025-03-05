@@ -1,0 +1,45 @@
+version: '3.4'
+
+services:
+  catalogdb:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: catalogdb
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=ewww@20230302   
+    # restart: always
+    ports:
+        - "1501:1433"
+    volumes:
+      - sqlserver_data:/var/opt/mssql 
+    networks:
+      - eshopping_network 
+
+  catalog.api:
+    image: ${DOCKER_REGISTRY-}catalogapi
+    build:
+      context: .
+      dockerfile: Services/Catalog/Catalog.Api/Dockerfile
+
+    container_name: catalog_api
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=Server=catalogdb,1433; Database=CatalogService; User Id=sa; Password=ewww@20230302; TrustServerCertificate=True;
+    depends_on:
+      - catalogdb
+      # - rabbitmq
+    ports:
+      - "7001:7070"
+    networks:
+      - eshopping_network 
+
+volumes:
+    sqlserver_data: 
+#   mongo_data:
+#   portainer_data:
+#   postgres_data:
+#   pgadmin_data:
+#   elasticsearch-data:  
+
+networks:
+  eshopping_network:    

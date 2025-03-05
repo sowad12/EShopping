@@ -9,6 +9,6 @@ namespace Discount.Application.Commands
 {
     public class DeleteDiscountCommand:IRequest<bool>
     {
-        public int Id { get; set; } 
+        public string  ProductName { get; set; } 
     }
 }

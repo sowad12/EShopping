@@ -9,9 +9,9 @@ namespace Discount.Repository.Interface
 {
     public interface IDiscountManager
     {
-        Task<Coupon> GetDiscount(int id);
+        Task<Coupon> GetDiscount(string ProductName);
         Task<bool>CreateDiscount(Coupon coupon);
         Task<bool>UpdateDiscount(Coupon coupon);
-        Task<bool>DeleteDiscount(int id);
+        Task<bool>DeleteDiscount(string ProductName);
     }
 }

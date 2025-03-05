@@ -13,7 +13,7 @@ namespace Discount.Application.Handlers
         }
         public async Task<bool> Handle(DeleteDiscountCommand request, CancellationToken cancellationToken)
         {
-            return await _discountManager.DeleteDiscount(request.Id);
+            return await _discountManager.DeleteDiscount(request.ProductName);
            
         }
     }

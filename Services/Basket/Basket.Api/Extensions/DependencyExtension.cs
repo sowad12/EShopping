@@ -1,11 +1,12 @@
 ﻿
 using Basket.Application.Commands;
+using Basket.Application.GrpcService;
 using Basket.Application.Handlers;
 using Basket.Repository.Manager.Implementation;
 using Basket.Repository.Manager.Interface;
+using Discount.Grpc.Protos;
 using EShopping.Core.Middleware;
-using Microsoft.Extensions.DependencyInjection;
-using System.Reflection;
+
 
 
 namespace Basket.Api.Extensions
@@ -56,8 +57,11 @@ namespace Basket.Api.Extensions
 
 
             services.AddScoped<IBasketManager, BasketManager>();
-          
 
+            //grpc
+            services.AddScoped<DiscountGrpcService>();
+            services.AddGrpcClient<DiscountProtoService.DiscountProtoServiceClient>
+                (o => o.Address = new Uri(configuration["GrpcSettings:DiscountUrl"]));
 
             return services;
         }

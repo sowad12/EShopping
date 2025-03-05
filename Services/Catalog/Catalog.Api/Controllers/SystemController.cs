@@ -44,8 +44,6 @@ namespace Catalog.Api.Controllers
             var result = await _systemManager.StoredProcedure();
             return Ok(result);
         }
-
-
     }
 
 }

@@ -1,4 +1,5 @@
 
+using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Serilog;
 
 namespace Discount.Api
@@ -37,7 +38,11 @@ namespace Discount.Api
                .ConfigureWebHostDefaults(webBuilder =>
                {
                    webBuilder.UseStartup<Startup>();
-
+                   webBuilder.ConfigureKestrel(options =>
+                   {
+                       // Setup an HTTP/2 endpoint without TLS
+                       options.ListenAnyIP(5268, o => o.Protocols = HttpProtocols.Http2);
+                   });
                })
                .UseDefaultServiceProvider(options => options.ValidateScopes = false);
     }
