@@ -1,4 +1,4 @@
-﻿using Catalog.Library.Context;
+﻿using Order.Library.Context;
 using EShopping.Core.Infrastructure.Implementation;
 using EShopping.Core.Infrastructure.Interface;
 using EShopping.Core.Infrastructure.Options;
@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using System.Reflection;
 
-namespace Catalog.Api.Extensions
+namespace Order.Api.Extensions
 {
     public static class DBExtension
     {

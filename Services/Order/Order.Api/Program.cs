@@ -1,6 +1,7 @@
-using Serilog.Events;
+
 using Serilog;
-namespace Catalog.Api
+
+namespace Order.Api
 {
     public class Program
     {
@@ -32,7 +33,7 @@ namespace Catalog.Api
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
            Host.CreateDefaultBuilder(args)
-              //.UseSerilog()
+               //.UseSerilog()
                .ConfigureWebHostDefaults(webBuilder =>
                {
                    webBuilder.UseStartup<Startup>();

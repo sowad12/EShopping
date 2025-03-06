@@ -1,8 +1,10 @@
-﻿using Catalog.Repository.Manager.Implementation;
-using Catalog.Repository.Manager.Interface;
+﻿
+//using Order.Repository.Manager.Implementation;
+//using Order.Repository.Manager.Interface;
 using EShopping.Core.Middleware;
+using Order.Api.Extensions;
 
-namespace Catalog.Api.Extensions
+namespace Order.Api.Extensions
 {
     public static class DependencyConfiguration
     {
@@ -32,12 +34,10 @@ namespace Catalog.Api.Extensions
                 .Session);
            
 
-            services.AddScoped<ISystemManager, SystemManager>();
-            services.AddScoped<IProductManager, ProductManager>();
-            services.AddScoped<IBrandManager, ProductManager>();
-            services.AddScoped<ITypeManager, ProductManager>();
-
-
+            //services.AddScoped<ISystemManager, SystemManager>();
+            //services.AddScoped<IProductManager, ProductManager>();
+            //services.AddScoped<IBrandManager, ProductManager>();
+            //services.AddScoped<ITypeManager, ProductManager>();
 
         
             return services;

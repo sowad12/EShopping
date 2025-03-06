@@ -1,10 +1,11 @@
 ﻿
-using Catalog.Api.Extensions;
+using Order.Api.Extensions;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Configuration;
 
-namespace Catalog.Api
-{  
+namespace Order.Api
+{
+ 
         public class Startup
         {
             public IConfiguration Configuration;
@@ -35,4 +36,4 @@ namespace Catalog.Api
                 });
             }
         }
-    }
+}
