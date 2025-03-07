@@ -1,6 +1,7 @@
 ﻿
 using EShopping.Core.Infrastructure.Implementation;
 using Microsoft.EntityFrameworkCore;
+using Order.Library.Model.Entities;
 
 namespace Order.Library.Context
 {
@@ -30,6 +31,6 @@ namespace Order.Library.Context
             base.OnModelCreating(modelBuilder);
         }
 
-        //public DbSet<Product> Product { get; set; }
+        public DbSet<CustomerOrder> CustomerOrder { get; set; }
     }
 }
