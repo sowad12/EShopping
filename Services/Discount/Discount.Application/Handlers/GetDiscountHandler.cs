@@ -2,6 +2,7 @@
 using Discount.Grpc.Protos;
 using Discount.Repository.Interface;
 using EShopping.Core.Exceptions;
+using Grpc.Core;
 using MediatR;
 
 namespace Discount.Application.Handlers
@@ -16,7 +17,7 @@ namespace Discount.Application.Handlers
         public async Task<CouponModel> Handle(GetDiscountQuery request, CancellationToken cancellationToken)
         {
             var res=await _discountManager.GetDiscount(request.ProductName);
-            if(res is  null) throw new CustomException("Discount with product not found",System.Net.HttpStatusCode.NotFound);
+            if(res is  null) throw new RpcException(new Status(StatusCode.NotFound,"Discount with product not found"));
 
            var couponModel=new CouponModel()
            {

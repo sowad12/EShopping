@@ -41,8 +41,9 @@ namespace Discount.Api
                    webBuilder.ConfigureKestrel(options =>
                    {
                        // Setup an HTTP/2 endpoint without TLS
-                       options.ListenAnyIP(5268, o => o.Protocols = HttpProtocols.Http2);
+                       options.ListenAnyIP(9002, o => o.Protocols = HttpProtocols.Http2);
                    });
+
                })
                .UseDefaultServiceProvider(options => options.ValidateScopes = false);
     }

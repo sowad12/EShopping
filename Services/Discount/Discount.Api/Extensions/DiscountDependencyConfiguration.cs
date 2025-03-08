@@ -1,4 +1,5 @@
-﻿using Discount.Application.Commands;
+﻿using Discount.Api.Services;
+using Discount.Application.Commands;
 using Discount.Application.Handlers;
 using Discount.Repository.Implementation;
 using Discount.Repository.Interface;
@@ -66,6 +67,15 @@ namespace Discount.Api.Extensions
             app.UseAuthentication();
 
             app.UseAuthorization();
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapGrpcService<DiscountService>();
+                endpoints.MapGet("/", async context =>
+                {
+                    await context.Response.WriteAsync(
+                        "Communication with gRPC endpoints must be made through a gRPC client.");
+                });
+            });
             return app;
         }
     }

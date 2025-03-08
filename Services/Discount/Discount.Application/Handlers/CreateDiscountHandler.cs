@@ -5,6 +5,7 @@ using Discount.Grpc.Protos;
 using Discount.Library.Model.Entites;
 using Discount.Repository.Interface;
 using EShopping.Core.Exceptions;
+using Grpc.Core;
 using MediatR;
 
 namespace Discount.Application.Handlers
@@ -23,7 +24,7 @@ namespace Discount.Application.Handlers
 
             var coupon = _mapper.Map<Coupon>(request);
             var res = await _discountManager.CreateDiscount(coupon);
-            if (res == false) throw new CustomException("cannot create discount", System.Net.HttpStatusCode.InternalServerError);
+            if (res == false) throw new RpcException(new Status(StatusCode.Internal, "cannot create discount"));
             var couponModel = _mapper.Map<CouponModel>(coupon);
             return couponModel;
         }

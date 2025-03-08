@@ -5,6 +5,7 @@ using Discount.Library.Model.Entites;
 using Discount.Repository.Implementation;
 using Discount.Repository.Interface;
 using EShopping.Core.Exceptions;
+using Grpc.Core;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -27,7 +28,7 @@ namespace Discount.Application.Handlers
         {
             var coupon = _mapper.Map<Coupon>(request);
             var res = await _discountManager.UpdateDiscount(coupon);
-            if (res == false) throw new CustomException("cannot update discount", System.Net.HttpStatusCode.InternalServerError);
+            if (res == false) throw new RpcException(new Status(StatusCode.Internal, "cannot update discount"));
             var couponModel = _mapper.Map<CouponModel>(coupon);
             return couponModel;
         }
