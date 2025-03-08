@@ -1,6 +1,4 @@
 ﻿
-//using Order.Repository.Manager.Implementation;
-//using Order.Repository.Manager.Interface;
 using EShopping.Core.Middleware;
 using Order.Api.Extensions;
 

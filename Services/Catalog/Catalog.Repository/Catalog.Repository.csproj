@@ -15,8 +15,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\..\..\EShopping.Core\EShopping.Core.csproj" />
-		<ProjectReference Include="..\..\..\EShopping.Utilities\EShopping.Utilities.csproj" />
+		<ProjectReference Include="..\..\..\Common\EShopping.Core\EShopping.Core.csproj" />
+		<ProjectReference Include="..\..\..\Common\EShopping.Utilities\EShopping.Utilities.csproj" />		
 		<ProjectReference Include="..\Catalog.Library\Catalog.Library.csproj" />
 	</ItemGroup>
 	<!--<ItemGroup>

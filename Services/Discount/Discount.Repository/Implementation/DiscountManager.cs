@@ -47,7 +47,6 @@ namespace Discount.Repository.Implementation
             return coupon;
 
         }
-
         public async Task<bool> UpdateDiscount(Coupon coupon)
         {
             var existingCoupon = await _dbContext.Coupons.FirstOrDefaultAsync(x => x.Id == coupon.Id);

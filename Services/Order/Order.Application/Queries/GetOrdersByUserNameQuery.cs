@@ -1,6 +1,4 @@
-﻿using EShopping.Utilities.Pagination;
-using EShopping.Utilities.Sort;
-using MediatR;
+﻿using MediatR;
 using Order.Library.Model.ViewModel;
 using System;
 using System.Collections.Generic;

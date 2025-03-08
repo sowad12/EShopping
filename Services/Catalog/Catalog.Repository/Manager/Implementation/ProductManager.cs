@@ -1,11 +1,9 @@
 ﻿
-using Azure.Core;
-using Catalog.Library.Model.Entities;
+
 using Catalog.Library.Model.ViewModel;
 using Catalog.Repository.Manager.Interface;
 using EShopping.Core.Infrastructure.Interface;
 using EShopping.Core.ViewModels;
-using MediatR;
 using System.Net;
 
 

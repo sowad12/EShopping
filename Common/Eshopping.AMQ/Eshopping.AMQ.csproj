@@ -6,9 +6,4 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\Common\EShopping.Core\EShopping.Core.csproj" />
-    <ProjectReference Include="..\Discount.Library\Discount.Library.csproj" />
-  </ItemGroup>
-
 </Project>

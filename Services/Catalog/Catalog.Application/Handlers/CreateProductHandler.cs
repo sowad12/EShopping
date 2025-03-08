@@ -4,7 +4,6 @@ using Catalog.Library.Model.Entities;
 using Catalog.Library.Model.ViewModel;
 using Catalog.Repository.Manager.Interface;
 using EShopping.Core.Exceptions;
-using EShopping.Core.ViewModels;
 using MediatR;
 using System.Drawing.Drawing2D;
 using System.Net;

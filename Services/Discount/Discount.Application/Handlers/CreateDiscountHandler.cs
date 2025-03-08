@@ -4,7 +4,6 @@ using Discount.Application.Commands;
 using Discount.Grpc.Protos;
 using Discount.Library.Model.Entites;
 using Discount.Repository.Interface;
-using EShopping.Core.Exceptions;
 using Grpc.Core;
 using MediatR;
 

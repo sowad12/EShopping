@@ -1,6 +1,5 @@
 ﻿using Catalog.Library.Model.Entities;
 using Catalog.Library.Model.ViewModel;
-using EShopping.Core.ViewModels;
 using MediatR;
 using System;
 using System.Collections.Generic;

@@ -1,10 +1,10 @@
 ﻿using Order.Library.Context;
-using EShopping.Core.Infrastructure.Implementation;
-using EShopping.Core.Infrastructure.Interface;
-using EShopping.Core.Infrastructure.Options;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using System.Reflection;
+using EShopping.Core.Infrastructure.Options;
+using EShopping.Core.Infrastructure.Interface;
+using EShopping.Core.Infrastructure.Implementation;
 
 namespace Order.Api.Extensions
 {

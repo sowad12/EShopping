@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Common\EShopping.Core\EShopping.Core.csproj" />
     <ProjectReference Include="..\Catalog.Library\Catalog.Library.csproj" />
     <ProjectReference Include="..\Catalog.Repository\Catalog.Repository.csproj" />
   </ItemGroup>

@@ -1,7 +1,6 @@
 ﻿using Discount.Application.Queries;
 using Discount.Grpc.Protos;
 using Discount.Repository.Interface;
-using EShopping.Core.Exceptions;
 using Grpc.Core;
 using MediatR;
 
