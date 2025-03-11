@@ -1,5 +1,8 @@
 ﻿
+using Eshopping.AMQ.Common;
 using EShopping.Core.Middleware;
+using MassTransit;
+using Order.Api.EventBusConsumer;
 using Order.Api.Extensions;
 
 namespace Order.Api.Extensions
@@ -30,14 +33,28 @@ namespace Order.Api.Extensions
                 .GetRequiredService<IHttpContextAccessor>()
                 .HttpContext
                 .Session);
-           
 
-            //services.AddScoped<ISystemManager, SystemManager>();
-            //services.AddScoped<IProductManager, ProductManager>();
-            //services.AddScoped<IBrandManager, ProductManager>();
-            //services.AddScoped<ITypeManager, ProductManager>();
+            services.AddMassTransit(config =>
+            {
+                //Mark this as consumer
+                config.AddConsumer<BasketOrderConsumer>();
+                config.UsingRabbitMq((ctx, cfg) =>
+                {
+                    cfg.Host(configuration["EventBusSettings:HostAddress"]);
+                    //provide the queue name with consumer settings
+                    cfg.ReceiveEndpoint(EventBusConstants.BasketCheckoutQueue, c =>
+                    {
+                        c.ConfigureConsumer<BasketOrderConsumer>(ctx);
+                    });
+                    ////V2 endpoint will pick items from here 
+                    //cfg.ReceiveEndpoint(EventBusConstants.BasketCheckoutQueueV2, c =>
+                    //{
+                    //    c.ConfigureConsumer<BasketOrderingConsumerV2>(ctx);
+                    //});
+                });
+            });
+            services.AddMassTransitHostedService();
 
-        
             return services;
         }
 

@@ -6,6 +6,7 @@ using Basket.Repository.Manager.Implementation;
 using Basket.Repository.Manager.Interface;
 using Discount.Grpc.Protos;
 using EShopping.Core.Middleware;
+using MassTransit;
 
 
 
@@ -62,6 +63,15 @@ namespace Basket.Api.Extensions
             services.AddScoped<DiscountGrpcService>();
             services.AddGrpcClient<DiscountProtoService.DiscountProtoServiceClient>
                 (o => o.Address = new Uri(configuration["GrpcSettings:DiscountUrl"]));
+
+            services.AddMassTransit(config =>
+            {
+                config.UsingRabbitMq((ct, cfg) =>
+                {
+                    cfg.Host(configuration["EventBusSettings:HostAddress"]);
+                });
+            });
+            services.AddMassTransitHostedService();
 
             return services;
         }

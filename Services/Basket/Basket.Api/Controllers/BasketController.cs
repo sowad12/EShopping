@@ -37,6 +37,13 @@ namespace Basket.Api.Controllers
             var result = await _mediator.Send(deleteBasketByNameQuery).AsDeleted();
             return Ok(result);
         }
+        [HttpPost("basket-checkout")]
+        public async Task<IActionResult> BasketCheckout([FromBody]BasketCheckoutCommand basketCheckout)
+        {
+            var result = await _mediator.Send(basketCheckout).AsCreated();
+            //return Ok(result);
+            return Ok(result);
+        }
 
     }
 }

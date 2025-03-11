@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Basket.Library.Model.Entities
+namespace Eshopping.AMQ.Events
 {
-    public class BasketCheckout
+    public class BasketCheckOutEvent:BaseEvent
     {
-        public string UserName { get; set; }    
-        public decimal TotalPrice { get; set; } 
+        public string UserName { get; set; }
+        public decimal TotalPrice { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string EmailAddress { get; set; }
@@ -17,10 +17,10 @@ namespace Basket.Library.Model.Entities
         public string Country { get; set; }
         public string State { get; set; }
         public string ZipCode { get; set; }
-        public string CardName { get; set; }    
+        public string CardName { get; set; }
         public string CardNumber { get; set; }
-        public string Expiration {  get; set; } 
-        public string Cvv {  get; set; }
-        public string PaymentMethod { get; set; }   
+        public string Expiration { get; set; }
+        public string Cvv { get; set; }
+        public string PaymentMethod { get; set; }
     }
 }

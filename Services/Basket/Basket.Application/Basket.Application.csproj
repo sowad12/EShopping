@@ -7,18 +7,19 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Mappers\" />
     <Folder Include="Queries\" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="14.0.0" />
     <PackageReference Include="Grpc.AspNetCore" Version="2.67.0" />
+    <PackageReference Include="MassTransit" Version="7.3.1" />
     <PackageReference Include="MediatR" Version="12.4.1" />
   </ItemGroup>
 
   <ItemGroup>
     <!--<ProjectReference Include="..\..\Discount\Discount.Application\Discount.Application.csproj" />-->
+    <ProjectReference Include="..\..\..\Common\Eshopping.AMQ\Eshopping.AMQ.csproj" />
     <ProjectReference Include="..\Basket.Library\Basket.Library.csproj" />
     <ProjectReference Include="..\Basket.Repository\Basket.Repository.csproj" />
   </ItemGroup>
