@@ -3,6 +3,7 @@ using Eshopping.AMQ.Events;
 using MassTransit;
 using MediatR;
 using Order.Application.Commands;
+using Order.Application.Mappers;
 
 namespace Order.Api.EventBusConsumer
 {
@@ -19,7 +20,8 @@ namespace Order.Api.EventBusConsumer
         {
             try
             {
-                var command = _mapper.Map<CheckoutOrderCommand>(context.Message);
+                var command = OrderMapper.Mapper.Map<CheckoutOrderCommand>(context.Message);
+                
                 var result = await _mediator.Send(command);
             }
             catch(Exception ex)

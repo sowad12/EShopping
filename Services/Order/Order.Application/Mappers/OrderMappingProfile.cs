@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Eshopping.AMQ.Events;
 using Order.Application.Commands;
 using Order.Application.Queries;
 using Order.Library.Model.Entities;
@@ -18,7 +19,8 @@ namespace Order.Application.Mappers
             CreateMap<CheckoutOrderCommand, CustomerOrder>().ReverseMap();
             CreateMap<GetOrdersByUserNameQuery, OrderViewModel>().ReverseMap();
             CreateMap<UpdateOrderCommand, CustomerOrder>().ReverseMap();
-            CreateMap<CustomerOrder, OrderViewModel>();
+            CreateMap<CustomerOrder, OrderViewModel>().ReverseMap();
+            CreateMap<BasketCheckOutEvent, CheckoutOrderCommand>().ReverseMap();
         }
     }
 }

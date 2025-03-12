@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Common\Eshopping.AMQ\Eshopping.AMQ.csproj" />
     <ProjectReference Include="..\..\..\Common\EShopping.Core\EShopping.Core.csproj" />
     <ProjectReference Include="..\Order.Library\Order.Library.csproj" />
   </ItemGroup>
