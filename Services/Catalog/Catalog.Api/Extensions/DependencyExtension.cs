@@ -14,7 +14,7 @@ namespace Catalog.Api.Extensions
 
             services.AddSwaggerService(configuration);
             services.AddMemoryCache();
-
+            services.AddRouting(options => options.LowercaseUrls = true);
             services.AddAutoMapper(typeof(Startup));
 
             //services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining(typeof(Startup)));

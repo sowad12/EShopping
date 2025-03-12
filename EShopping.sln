@@ -55,6 +55,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EShopping.Core", "Common\ES
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EShopping.Utilities", "Common\EShopping.Utilities\EShopping.Utilities.csproj", "{40441A7E-E6CE-4C3C-966E-FB0058D4EADC}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Gateways", "Gateways", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gateway.Global", "Services\Gateways\Gateway.Global\Gateway.Global.csproj", "{2FF3EBE1-99EA-49C7-8762-80C4742168FF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -141,6 +145,10 @@ Global
 		{40441A7E-E6CE-4C3C-966E-FB0058D4EADC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{40441A7E-E6CE-4C3C-966E-FB0058D4EADC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{40441A7E-E6CE-4C3C-966E-FB0058D4EADC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2FF3EBE1-99EA-49C7-8762-80C4742168FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2FF3EBE1-99EA-49C7-8762-80C4742168FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2FF3EBE1-99EA-49C7-8762-80C4742168FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2FF3EBE1-99EA-49C7-8762-80C4742168FF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -169,6 +177,7 @@ Global
 		{8C0E564C-288C-46DA-8BE7-C42A06577E4B} = {D20FE9FB-B2CE-49D0-83C1-C8CEF095A963}
 		{11095D6D-B746-4886-9B4C-07831C0ED402} = {D20FE9FB-B2CE-49D0-83C1-C8CEF095A963}
 		{40441A7E-E6CE-4C3C-966E-FB0058D4EADC} = {D20FE9FB-B2CE-49D0-83C1-C8CEF095A963}
+		{2FF3EBE1-99EA-49C7-8762-80C4742168FF} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {89CB0C4C-EFFC-42D9-87BB-148F2A3630B7}
