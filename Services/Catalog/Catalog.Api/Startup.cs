@@ -1,5 +1,6 @@
 ﻿
 using Catalog.Api.Extensions;
+using EShopping.Core.Filters;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Configuration;
 
@@ -17,6 +18,10 @@ namespace Catalog.Api
                 services.AddControllers();
 
                 services.AddDependencies(Configuration);
+                services.AddControllers(options =>
+                {
+                    options.Filters.Add(typeof(InputValidationFilter));             //options.Filters.Add(type of(ExceptionFilter));
+                });
             }
             public void Configure(IApplicationBuilder app,
                 IWebHostEnvironment env,

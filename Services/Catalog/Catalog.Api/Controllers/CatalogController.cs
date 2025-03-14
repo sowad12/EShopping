@@ -12,11 +12,11 @@ using System.Net;
 
 namespace Catalog.Api.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [ApiController]
     [ApiVersion("1")]
     [Route("api/v{version:apiVersion}/[controller]")]
-    public class CatalogController : ControllerBase
+    public class CatalogController : BaseApiController
     {
         private IMediator _mediator;
         public CatalogController(IMediator mediator)

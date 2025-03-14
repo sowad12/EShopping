@@ -1,9 +1,7 @@
-﻿
-using Identity.Library.Contexts;
+﻿using Identity.Library.Contexts;
 using Identity.Library.CustomInformation;
 using Identity.Library.Domains.Entities;
 using Identity.Main.Extensions.Configurations;
-using Identity.Service.Repository.Contexts;
 using IdentityServer4.Configuration;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;

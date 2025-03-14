@@ -17,6 +17,9 @@ namespace Catalog.Api.Extensions
             services.AddRouting(options => options.LowercaseUrls = true);
             services.AddAutoMapper(typeof(Startup));
 
+            services.AddAuthorizationServices(configuration);
+            services.AddAuthenticationServices(configuration);
+
             //services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining(typeof(Startup)));
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(AppDomain.CurrentDomain.GetAssemblies()));
             // Options

@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace Identity.Service.Repository.Contexts
+namespace Identity.Library.Contexts
 {
     public class AppIdentityDbContext : IdentityDbContext<User, Role, string>
     {

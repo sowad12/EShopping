@@ -116,7 +116,7 @@ namespace Identity.Library.Configurations
                         new Secret("angular-secret".Sha256())
                     },
 
-                    RequireClientSecret = false,
+                    //RequireClientSecret = false,
                     RequireConsent = false,
                     AllowRememberConsent = false,
                     AllowedGrantTypes = GrantTypes.Code,
@@ -151,30 +151,30 @@ namespace Identity.Library.Configurations
                     RefreshTokenUsage = TokenUsage.OneTimeOnly,
                     AlwaysIncludeUserClaimsInIdToken = true
                 },
-
-                //STAGING CLIENT
                 new Client
                 {
-                    ClientId = "vue id staging",
+                    ClientId = "test-id",
                     ClientSecrets = {
-                        new Secret("vue secret staging".Sha256())
+                        new Secret("test".Sha256())
                     },
+
                     RequireClientSecret = false,
                     RequireConsent = false,
                     AllowRememberConsent = false,
-                    AllowedGrantTypes = GrantTypes.Code,
+                    AllowedGrantTypes = GrantTypes.ClientCredentials,
 
                     RedirectUris = {
-                        "https://clubeezapp.business-plaza.net/authcallback",
-                        "https://clubeezapp.business-plaza.net/callback.html",
-                        "https://appclub.webmascot.net/authcallback",
-                        "https://stage-app.clubeez.com/authcallback"
+                        "http://localhost:4200/authcallback",
+                        "https://localhost:4200/authcallback",
+                        "http://localhost:4200/auth/callback",
+                        "https://localhost:4200/auth/callback"
                     },
 
                     PostLogoutRedirectUris = {
-                        "https://clubeezapp.business-plaza.net/authcallbacksignout",
-                        "https://appclub.webmascot.net/authcallbacksignout",
-                        "https://stage-app.clubeez.com/authcallbacksignout"
+                        "http://localhost:4200/authcallbacksignout",
+                        "https://localhost:4200/authcallbacksignout",
+                        "http://localhost:4200/auth/callbacksignout",
+                        "https://localhost:4200/auth/callbacksignout",
                     },
 
                     RequirePkce = true,
@@ -182,46 +182,10 @@ namespace Identity.Library.Configurations
                     AllowOfflineAccess = true,
 
                     AllowedScopes = {
-                        IdentityServerConstants.StandardScopes.OpenId,
-                        IdentityServerConstants.StandardScopes.Profile,
-                        IdentityServerConstants.StandardScopes.OfflineAccess
-                    },
-
-                    AccessTokenType = AccessTokenType.Jwt,
-                    AlwaysSendClientClaims = true,
-                    AccessTokenLifetime = 3600,
-                    RefreshTokenUsage = TokenUsage.OneTimeOnly,
-                    AlwaysIncludeUserClaimsInIdToken = true,
-                },
-                
-                // LIVE CLIENT
-                new Client
-                {
-                    ClientId = "vue-id-live",
-                    ClientSecrets = {
-                        new Secret("vue-secret-live".Sha256())
-                    },
-                    RequireClientSecret = false,
-                    RequireConsent = false,
-                    AllowRememberConsent = false,
-                    AllowedGrantTypes = GrantTypes.Code,
-
-                    RedirectUris = {
-                        "https://app.clubeez.com/authcallback"
-                    },
-
-                    PostLogoutRedirectUris = {
-                        "https://app.clubeez.com/authcallbacksignout"
-                    },
-
-                    RequirePkce = true,
-
-                    AllowOfflineAccess = true,
-
-                    AllowedScopes = {
-                        IdentityServerConstants.StandardScopes.OpenId,
-                        IdentityServerConstants.StandardScopes.Profile,
-                        IdentityServerConstants.StandardScopes.OfflineAccess
+                    IdentityServerConstants.StandardScopes.OpenId,
+                    IdentityServerConstants.StandardScopes.Profile,
+                    IdentityServerConstants.StandardScopes.OfflineAccess,
+                    "IdentityServerApi"
                     },
 
                     AccessTokenType = AccessTokenType.Jwt,
@@ -229,8 +193,7 @@ namespace Identity.Library.Configurations
                     AccessTokenLifetime = 3600,
                     RefreshTokenUsage = TokenUsage.OneTimeOnly,
                     AlwaysIncludeUserClaimsInIdToken = true
-                }
-
+                },
             };
         }
 
