@@ -1,6 +1,5 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using Identity.Main.Models;
 using IdentityServer4.Services;
 using Microsoft.AspNetCore.Authorization;
 
