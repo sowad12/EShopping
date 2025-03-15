@@ -11,16 +11,36 @@ namespace EShopping.Core.Extensions
     {
         public static IServiceCollection AddIdentityServerAuthenticationServices(this IServiceCollection services, IdentityServerOptions optionData)
         {
+            //services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            //        .AddJwtBearer(options =>
+            //        {
+            //            options.Authority = optionData.Authority;
+            //            //options.Audience = "Catalog";
+            //            options.TokenValidationParameters = new TokenValidationParameters
+            //            {
+            //                ValidateAudience = false
+            //            };
+            //        });
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                     .AddJwtBearer(options =>
                     {
-                        options.Authority = optionData.Authority;
-                        options.Audience = "IdentityServerApi";
-                        //options.TokenValidationParameters = new TokenValidationParameters
-                        //{
-                        //    ValidateAudience = false
-                        //};
+                        options.Authority = "https://localhost:5006";
+                        options.Audience = "Catalog";
+                        options.Events = new JwtBearerEvents
+                        {
+                            OnTokenValidated = context =>
+                            {
+                                Console.WriteLine("Token validated successfully!");
+                                return Task.CompletedTask;
+                            },
+                            OnAuthenticationFailed = context =>
+                            {
+                                Console.WriteLine($"Authentication failed: {context.Exception.Message}");
+                                return Task.CompletedTask;
+                            }
+                        };
                     });
+
 
             return services;
         }

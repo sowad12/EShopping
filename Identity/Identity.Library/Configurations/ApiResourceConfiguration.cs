@@ -10,7 +10,12 @@ namespace Identity.Library.Configurations
         {
             return new List<ApiResource>
             {
-                   new ApiResource(IdentityServerConstants.LocalApi.ScopeName)
+                   new ApiResource(IdentityServerConstants.LocalApi.ScopeName),
+                   new ApiResource("Catalog", "Catalog.API")
+                   {
+                       Scopes={"catalogapi"}
+                   }
+
             };
         }
 

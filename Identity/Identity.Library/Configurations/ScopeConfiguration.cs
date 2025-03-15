@@ -15,7 +15,8 @@ namespace Identity.Library.Configurations
                 {
                     Name = IdentityServerConstants.LocalApi.ScopeName,
                     DisplayName = IdentityServerConstants.LocalApi.ScopeName
-                }
+                },
+                new ApiScope("catalogapi")
             };
 
         }

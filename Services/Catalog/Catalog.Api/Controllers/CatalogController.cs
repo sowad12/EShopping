@@ -16,7 +16,7 @@ namespace Catalog.Api.Controllers
     [ApiController]
     [ApiVersion("1")]
     [Route("api/v{version:apiVersion}/[controller]")]
-    public class CatalogController : BaseApiController
+    public class CatalogController : ControllerBase
     {
         private IMediator _mediator;
         public CatalogController(IMediator mediator)
