@@ -182,7 +182,7 @@ namespace Identity.Library.Configurations
                     AllowOfflineAccess = true,
 
                     AllowedScopes = {
-                       "catalogapi"
+                       "IdentityServerApi"
                     },
 
                     AccessTokenType = AccessTokenType.Jwt,

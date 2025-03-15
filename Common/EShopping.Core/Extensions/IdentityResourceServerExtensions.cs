@@ -24,8 +24,12 @@ namespace EShopping.Core.Extensions
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                     .AddJwtBearer(options =>
                     {
-                        options.Authority = "https://localhost:5006";
-                        options.Audience = "Catalog";
+                        options.Authority = optionData.Authority;
+                        //options.Audience = "Catalog";
+                        options.TokenValidationParameters = new TokenValidationParameters
+                        {
+                            ValidateAudience = false
+                        };
                         options.Events = new JwtBearerEvents
                         {
                             OnTokenValidated = context =>
