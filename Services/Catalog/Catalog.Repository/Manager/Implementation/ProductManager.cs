@@ -72,7 +72,7 @@ namespace Catalog.Repository.Manager.Implementation
             }
         }
 
-        public async Task<IEnumerable<ProductViewModel>> GetAllProducts(GetAllProductViewModel query)
+        public async Task<List<ProductViewModel>> GetAllProducts(GetAllProductViewModel query)
         {
             try
             {

@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Catalog.Application.Queries
 {
-    public class GetAllProductsQuery:IRequest<IEnumerable<ProductViewModel>>
+    public class GetAllProductsQuery:IRequest<PagedCollection<ProductViewModel>>
     {
         public string? SearchQuery { get; set; }
         public PagingOptions? pagingOptions { get; set; }

@@ -12,7 +12,7 @@ using System.Net;
 
 namespace Catalog.Api.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [ApiController]
     [ApiVersion("1")]
     [Route("api/v{version:apiVersion}/[controller]")]

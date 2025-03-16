@@ -1,6 +1,8 @@
 ﻿using Catalog.Repository.Manager.Implementation;
 using Catalog.Repository.Manager.Interface;
+using EShopping.Core.Extensions;
 using EShopping.Core.Middleware;
+using Microsoft.Extensions.Configuration;
 
 namespace Catalog.Api.Extensions
 {
@@ -24,7 +26,9 @@ namespace Catalog.Api.Extensions
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(AppDomain.CurrentDomain.GetAssemblies()));
             // Options
             services.AddOptions();
-         
+            //cors
+            services.AddCorsServices(configuration);
+
 
             // Add Database Context
             services.AddDatabaseContextService(configuration, logger);
@@ -58,13 +62,13 @@ namespace Catalog.Api.Extensions
             app.UseMiddleware<GlobalExceptionHandlingMiddleware>();
 
             app.UseSwaggerService();
-         
+
+            app.UseCorsServices(configuration);
 
             app.UseHttpsRedirection();
 
             app.UseRouting();
-
-            
+           
             app.UseAuthentication();
 
             app.UseAuthorization();
