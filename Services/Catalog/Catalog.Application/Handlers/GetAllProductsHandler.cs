@@ -20,6 +20,8 @@ namespace Catalog.Application.Handlers
             try
             {
                 GetAllProductViewModel getAllProductViewModel = new GetAllProductViewModel();
+                getAllProductViewModel.BrandId = query.BrandId;
+                getAllProductViewModel.TypeId = query.TypeId;   
                 getAllProductViewModel.SearchQuery = query.SearchQuery;
                 getAllProductViewModel.pagingOptions = query.pagingOptions;
                 getAllProductViewModel.sortOptions = query.sortOptions;

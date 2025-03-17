@@ -92,7 +92,8 @@ namespace Catalog.Repository.Manager.Implementation
                 }
                 var result = await _dapper.StoredProcedureQueryAsync<ProductViewModel>("PRODUCT_SELECT_ALL", new
                 {
-                    
+                    BrandId=query.BrandId,
+                    TypeId=query.TypeId,
                     SearchQuery = !string.IsNullOrEmpty(query.SearchQuery) ? query.SearchQuery.ToLower().Trim() : "",
                     StartRow = query.pagingOptions is null ? 0 : query.pagingOptions.Offset,
                     EndRow = query.pagingOptions is null?0: query.pagingOptions.Limit,

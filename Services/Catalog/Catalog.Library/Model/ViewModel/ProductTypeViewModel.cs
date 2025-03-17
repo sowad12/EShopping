@@ -8,6 +8,7 @@ namespace Catalog.Library.Model.ViewModel
 {
     public class ProductTypeViewModel
     {
+        public long Id { get; set; }
         public string Name { get; set; }
     }
 }

@@ -169,6 +169,8 @@ END
 EXEC(N'
 CREATE OR ALTER PROC PRODUCT_SELECT_ALL
 (
+ @BrandId BIGINT=NULL,
+ @TypeId BIGINT=NULL,
  @SearchQuery VARCHAR(MAX)=NULL,
  @StartRow INT=0,
  @EndRow INT=0,
@@ -194,10 +196,13 @@ SELECT * FROM
            * FROM Product 
          WHERE 0=0
          AND IsDeleted=0
+
          AND CASE WHEN @SearchQuery IS NULL THEN 1 WHEN @SearchQuery='''' THEN 1 WHEN Name LIKE ''%''+@SearchQuery+''%'' THEN 1 ELSE 0 END =1
      )W
  )TBL
  WHERE 0=0
+ AND CASE WHEN @BrandId IS NULL THEN 1 WHEN @BrandId=0 THEN 1 WHEN TBL.ProductBrandId=@BrandId THEN 1 ELSE 0 END =1
+ AND CASE WHEN @TypeId IS NULL THEN 1 WHEN @TypeId=0 THEN 1 WHEN TBL.ProductTypeId=@TypeId THEN 1 ELSE 0 END =1
  AND CASE WHEN @EndRow IS NULL THEN 1 WHEN @EndRow=0 THEN 1 WHEN TBL.SL BETWEEN (@StartRow+1) AND (@StartRow+@EndRow) THEN 1 ELSE 0 END =1
 END
 ')

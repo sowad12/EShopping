@@ -13,6 +13,8 @@ namespace Catalog.Application.Queries
 {
     public class GetAllProductsQuery:IRequest<PagedCollection<ProductViewModel>>
     {
+        public long? BrandId { get; set; }
+        public long? TypeId { get; set; }
         public string? SearchQuery { get; set; }
         public PagingOptions? pagingOptions { get; set; }
         public SortOptions? sortOptions { get; set; }
