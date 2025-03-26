@@ -183,12 +183,11 @@ SELECT * FROM
     SELECT W.*,
         ROW_NUMBER() OVER (
          ORDER BY 
-                CASE WHEN @OrderBy IS NULL THEN W.CreatedAt END DESC,
-                CASE WHEN @OrderBy =''01'' THEN W.CreatedAt END DESC,
-                CASE WHEN @OrderBy = ''10'' THEN W.Name END ASC,
-                CASE WHEN @OrderBy = ''11'' THEN W.Name END DESC
-                --CASE WHEN @OrderBy = ''20'' THEN W.SubscriberStatus END ASC,
-                --CASE WHEN @OrderBy = ''21'' THEN W.SubscriberStatus END DESC
+                CASE WHEN @OrderBy IS NULL THEN W.CreatedAt END DESC,        
+                CASE WHEN @OrderBy = ''name asc'' THEN W.Name END ASC,
+                CASE WHEN @OrderBy = ''name desc'' THEN W.Name END DESC,
+                CASE WHEN @OrderBy = ''price asc'' THEN W.Price END ASC,
+                CASE WHEN @OrderBy = ''price desc'' THEN W.Price END DESC
         ) SL
      FROM
      (
@@ -196,13 +195,12 @@ SELECT * FROM
            * FROM Product 
          WHERE 0=0
          AND IsDeleted=0
-
          AND CASE WHEN @SearchQuery IS NULL THEN 1 WHEN @SearchQuery='''' THEN 1 WHEN Name LIKE ''%''+@SearchQuery+''%'' THEN 1 ELSE 0 END =1
+         AND CASE WHEN @BrandId IS NULL THEN 1 WHEN @BrandId=0 THEN 1 WHEN ProductBrandId=@BrandId THEN 1 ELSE 0 END =1
+         AND CASE WHEN @TypeId IS NULL THEN 1 WHEN @TypeId=0 THEN 1 WHEN ProductTypeId=@TypeId THEN 1 ELSE 0 END =1
      )W
  )TBL
  WHERE 0=0
- AND CASE WHEN @BrandId IS NULL THEN 1 WHEN @BrandId=0 THEN 1 WHEN TBL.ProductBrandId=@BrandId THEN 1 ELSE 0 END =1
- AND CASE WHEN @TypeId IS NULL THEN 1 WHEN @TypeId=0 THEN 1 WHEN TBL.ProductTypeId=@TypeId THEN 1 ELSE 0 END =1
  AND CASE WHEN @EndRow IS NULL THEN 1 WHEN @EndRow=0 THEN 1 WHEN TBL.SL BETWEEN (@StartRow+1) AND (@StartRow+@EndRow) THEN 1 ELSE 0 END =1
 END
 ')

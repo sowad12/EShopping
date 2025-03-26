@@ -6,6 +6,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Text.Json.Serialization;
 
 namespace Catalog.Library.Model.ViewModel
 {
@@ -18,6 +19,8 @@ namespace Catalog.Library.Model.ViewModel
         public string ImageFile { get; set; }
         public long ProductBrandId { get; set; }   
         public long ProductTypeId { get; set; }
+        [JsonIgnore]
+        public long TotalRow { get; set; }
         public decimal Price { get; set; }=decimal.Zero;
     }
 }

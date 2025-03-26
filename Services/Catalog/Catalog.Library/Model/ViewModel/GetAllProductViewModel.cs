@@ -14,6 +14,7 @@ namespace Catalog.Library.Model.ViewModel
         public long? TypeId { get; set; }
         public string SearchQuery { get; set; }
         public PagingOptions pagingOptions { get; set; }
-        public SortOptions sortOptions { get; set; }
+       // public SortOptions sortOptions { get; set; }
+        public string Orderby { get; set; }
     }
 }

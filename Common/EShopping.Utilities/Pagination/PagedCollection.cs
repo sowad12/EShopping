@@ -13,11 +13,11 @@ namespace EShopping.Utilities.Pagination
         public int? Offset { get; set; }
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
         public int? Limit { get; set; }
-        public int Size { get; set; }
+        public long Size { get; set; }
       
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
         string[] Sort { get; set; }
-        public PagedCollection(IList<T> items, int totalCount, IPagingOptions options, ISortOptions sortOptions = null)
+        public PagedCollection(IList<T> items, long totalCount, IPagingOptions options, ISortOptions sortOptions = null)
         {
             Items = items;
             Offset = options?.Offset is null?0: options?.Offset;

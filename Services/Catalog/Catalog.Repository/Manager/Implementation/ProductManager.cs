@@ -76,20 +76,7 @@ namespace Catalog.Repository.Manager.Implementation
         {
             try
             {
-
-                string orderBy = "01";
-                if (query.sortOptions is not null && query.sortOptions.OrderBy is not null)
-                {
-                    if (query.sortOptions.OrderBy.FirstOrDefault() == "name asc")
-                        orderBy = "10";
-                    if (query.sortOptions.OrderBy.FirstOrDefault() == "name desc")
-                        orderBy = "11";
-
-                    //if (query.sortOptions.OrderBy.FirstOrDefault() == "subscriberStatus asc")
-                    //    orderBy = "20";
-                    //if (query.sortOptions.OrderBy.FirstOrDefault() == "subscriberStatus desc")
-                    //    orderBy = "21";
-                }
+        
                 var result = await _dapper.StoredProcedureQueryAsync<ProductViewModel>("PRODUCT_SELECT_ALL", new
                 {
                     BrandId=query.BrandId,
@@ -97,8 +84,9 @@ namespace Catalog.Repository.Manager.Implementation
                     SearchQuery = !string.IsNullOrEmpty(query.SearchQuery) ? query.SearchQuery.ToLower().Trim() : "",
                     StartRow = query.pagingOptions is null ? 0 : query.pagingOptions.Offset,
                     EndRow = query.pagingOptions is null?0: query.pagingOptions.Limit,
-                    OrderBy= orderBy
+                    OrderBy= query.Orderby
                 });
+
                 return result;
 
             }

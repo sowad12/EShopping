@@ -24,9 +24,10 @@ namespace Catalog.Application.Handlers
                 getAllProductViewModel.TypeId = query.TypeId;   
                 getAllProductViewModel.SearchQuery = query.SearchQuery;
                 getAllProductViewModel.pagingOptions = query.pagingOptions;
-                getAllProductViewModel.sortOptions = query.sortOptions;
+                getAllProductViewModel.Orderby = query.Orderby;
                 var data = await _productManager.GetAllProducts(getAllProductViewModel);
-                return new PagedCollection<ProductViewModel>(data, data.Count(), query.pagingOptions);
+                var totalRow = data?.FirstOrDefault()?.TotalRow ?? 0;
+                return new PagedCollection<ProductViewModel>(data, totalRow, query.pagingOptions);
             }
             catch (Exception ex)
             {
