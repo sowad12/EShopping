@@ -25,8 +25,8 @@ namespace Basket.Api.Controllers
             return Ok(result);
         }
 
-        [HttpPost("get-cart")]
-        public async Task<IActionResult> GetCart(GetBasketByNameQuery  getBasketByNameQuery)
+        [HttpGet("get-cart")]
+        public async Task<IActionResult> GetCart([FromQuery]GetBasketByNameQuery  getBasketByNameQuery)
         {
             var result = await _mediator.Send(getBasketByNameQuery).AsSuccess();
             return Ok(result);
@@ -40,8 +40,7 @@ namespace Basket.Api.Controllers
         [HttpPost("basket-checkout")]
         public async Task<IActionResult> BasketCheckout([FromBody]BasketCheckoutCommand basketCheckout)
         {
-            var result = await _mediator.Send(basketCheckout).AsCreated();
-            //return Ok(result);
+            var result = await _mediator.Send(basketCheckout).AsCreated();        
             return Ok(result);
         }
 

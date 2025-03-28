@@ -22,16 +22,20 @@ namespace Basket.Application.Handlers
         }
         public async Task<ShoppingCart> Handle(UpdateCartCommand request, CancellationToken cancellationToken)
         {
+            decimal totalPrice = 0;
             foreach (var item in request.Items)
             {
                 var coupon = await _discountGrpcService.GetDiscount(item.ProductName);
                 item.Price -= coupon.Amount;
+                totalPrice += (item.Quantity * item.Price);
             }
             var res = await _basketManager.UpdateBasket(new ShoppingCart()
             {
                 Name=request.Name,
-                Items=request.Items
+                Items=request.Items,
+                TotalPrice=totalPrice
             });
+
             return res;          
         }
     }

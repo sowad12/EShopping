@@ -16,14 +16,14 @@ namespace Discount.Application.Handlers
         public async Task<CouponModel> Handle(GetDiscountQuery request, CancellationToken cancellationToken)
         {
             var res=await _discountManager.GetDiscount(request.ProductName);
-            if(res is  null) throw new RpcException(new Status(StatusCode.NotFound,"Discount with product not found"));
+            //if(res is  null) throw new RpcException(new Status(StatusCode.NotFound,"Discount with product not found"));
 
            var couponModel=new CouponModel()
            {
-               Id=res.Id,
-               Amount = (int)res.Amount,
-               Description=res.Description,
-               ProductName=res.ProductName,
+               Id= res is null?0:res.Id,
+               Amount = res is null ? 0 : (int)res.Amount,
+               Description= res is null ? string.Empty : res.Description,
+               ProductName=res is null?string.Empty:res.ProductName
            };
             return couponModel; 
         }

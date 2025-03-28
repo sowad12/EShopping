@@ -13,6 +13,7 @@ namespace Basket.Library.Model.Entities
             Items=new List<ShoppingCartItem>(); 
         }
         public string Name { get; set; }
+        public decimal TotalPrice { get; set; } = 0;
         public List<ShoppingCartItem> Items { get; set; }
     }
 }
