@@ -15,6 +15,8 @@ namespace Identity.Main.Extensions.Dependencies
 
             services.AddDbContext<AppConfigurationDbContext>
                 (x => x.UseSqlServer(_configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<AppGrantsDbContext>
+                (x => x.UseSqlServer(_configuration.GetConnectionString("DefaultConnection")));
             services.Configure<AppOptions>(_configuration.GetSection(nameof(AppOptions)));
 
             // CHECK IF CONNECTION AVAILABLE

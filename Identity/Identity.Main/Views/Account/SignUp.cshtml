@@ -1,0 +1,47 @@
+﻿@using Identity.Library.Domains.Commands.Account
+@model SignUpCommand
+
+<div class="login-page">
+    <partial name="_ValidationSummary" />
+    <div class="row">
+            <div class="col-sm-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Local Account</h2>
+                    </div>
+                    <div>
+
+                    </div>
+                    <div class="card-body">
+                        <form asp-route="Login">
+                            @* <input type="hidden" asp-for="ReturnUrl" /> *@
+
+                            <div class="form-group">
+                            <label asp-for="FirstName"></label>
+                            <input class="form-control" placeholder="FirstName" asp-for="FirstName" autofocus>
+                            </div>
+                        <div class="form-group">
+                            <label asp-for="LastName"></label>
+                            <input class="form-control" placeholder="LastName" asp-for="LastName" autofocus>
+                        </div>               
+                        <div class="form-group">
+                            <label asp-for="Email"></label>
+                            <input class="form-control" type="email" placeholder="Email" asp-for="Email" autofocus>
+                        </div>
+                    
+                            <div class="form-group">
+                                <label asp-for="Password"></label>
+                                <input type="password" class="form-control" placeholder="Password" asp-for="Password" autocomplete="off">
+                            </div>
+                        <div class="form-group">
+                            <label asp-for="ConfirmPassword"></label>
+                            <input type="password" class="form-control" placeholder="ConfirmPassword" asp-for="ConfirmPassword" autocomplete="off">
+                        </div>
+                           
+                            <button class="btn btn-primary" name="button" value="login">Register</button>
+                            <button class="btn btn-secondary" name="button" value="cancel">Cancel</button>
+                        </form>
+                    </div>
+                </div>
+            </div>    
+</div>

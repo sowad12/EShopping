@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Identity.Library.Migrations.App
 {
     [DbContext(typeof(AppIdentityDbContext))]
-    [Migration("20250314172130_inititalMigration")]
-    partial class inititalMigration
+    [Migration("20250329144646_default")]
+    partial class @default
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -61,7 +61,6 @@ namespace Identity.Library.Migrations.App
                         .HasColumnType("int");
 
                     b.Property<string>("Address")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ConcurrencyStamp")
@@ -90,7 +89,6 @@ namespace Identity.Library.Migrations.App
                         .HasColumnType("datetimeoffset");
 
                     b.Property<string>("Mobile")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NormalizedEmail")

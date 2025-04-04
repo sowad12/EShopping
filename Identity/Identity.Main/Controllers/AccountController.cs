@@ -14,6 +14,10 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Identity.Library.Domains.ViewModels.Account;
 using Identity.Library.Domains.Entities;
+using Newtonsoft.Json;
+using System.Security.Claims;
+using System.Web;
+using Identity.Library.Domains.ViewModels;
 
 namespace Identity.Main.Controllers
 {
@@ -27,6 +31,7 @@ namespace Identity.Main.Controllers
         private readonly IClientStore _clientStore;
         private readonly IAuthenticationSchemeProvider _schemeProvider;
         private readonly IEventService _events;
+        private readonly ILogger<AccountController> _logger;
 
         public AccountController(
             UserManager<User> userManager,
@@ -34,7 +39,8 @@ namespace Identity.Main.Controllers
             IIdentityServerInteractionService interaction,
             IClientStore clientStore,
             IAuthenticationSchemeProvider schemeProvider,
-            IEventService events)
+            IEventService events,
+            ILogger<AccountController> logger)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -42,6 +48,7 @@ namespace Identity.Main.Controllers
             _clientStore = clientStore;
             _schemeProvider = schemeProvider;
             _events = events;
+            _logger = logger;
         }
 
         /// <summary>
@@ -145,6 +152,76 @@ namespace Identity.Main.Controllers
             return View(vm);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> SignUp([FromQuery] string returnUrl, [FromQuery] string query)
+        {
+            SignUpCommand signUpCommand = new SignUpCommand();
+            //signUpCommand.ReturnUrl = returnUrl;
+            //ViewBag.ReturnUrl = returnUrl;
+
+            return View(signUpCommand);
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> SignUp(SignUpCommand command)
+        {
+            if (ModelState.IsValid)
+            {           
+                var user = new User
+                {
+                    UserName = command.Email,               
+                    FirstName = command.FirstName,
+                    LastName = command.LastName,
+                    Email = command.Email,                 
+                };
+                // Check if the username already exists
+                var userExists = await _userManager.FindByNameAsync(command.Email);
+                if (userExists != null)
+                {
+                    ModelState.AddModelError(nameof(command.Email), "Email already exists");
+                    return View(command);
+                }
+
+                if (command.Password != command.ConfirmPassword)
+                {
+                    ModelState.AddModelError(nameof(command.ConfirmPassword), "The password and confirm password must match.");
+                    return View(command);
+                }
+
+                IdentityResult result = await _userManager.CreateAsync(user, command.Password);
+
+                if (result.Succeeded)
+                {
+                    var userClaims = new List<ClaimViewModel>
+                    {
+                        new ClaimViewModel("AccessLevel", "user"),
+                        new ClaimViewModel("email", user.Email),
+                    };
+
+       
+                    IdentityResult claimAddResult = await _userManager.AddClaimsAsync(user, userClaims.Select(x => new Claim(x.Type, x.Value)));
+                  
+                    //userExists = await _userManager.FindByNameAsync(command.Email);
+                  
+                    var canSignIn = await _signInManager.CanSignInAsync(user);
+                    if (canSignIn)
+                    {
+                        await _signInManager.SignInAsync(user, isPersistent: false);                       
+                    }
+                    _logger.LogError($"SignUp [POST]:SignUp is failed for Registration. Model : {JsonConvert.SerializeObject(command)}");
+                    //return Redirect(command.ReturnUrl);
+                }
+
+                _logger.LogError($"SignUp [POST]: User creation is failed for Registration. Model : {JsonConvert.SerializeObject(command)}");
+                return View(command);
+            }
+
+            ModelState.AddModelError(nameof(command.Email), "Invalid Information");
+            //return Ok();
+            return View(command);
+        }
+
 
         /// <summary>
         /// Show logout page
@@ -153,51 +230,52 @@ namespace Identity.Main.Controllers
         public async Task<IActionResult> Logout(string logoutId)
         {
             // build a model so the logout page knows what to display
-            var vm = await BuildLogoutViewModelAsync(logoutId);
-
-            if (vm.ShowLogoutPrompt == false)
-            {
-                // if the request for logout was properly authenticated from IdentityServer, then
-                // we don't need to show the prompt and can just log the user out directly.
-                return await Logout(vm);
-            }
-
-            return View(vm);
+            //if (string.IsNullOrEmpty(logoutId))
+            //{
+            //    await _signInManager.SignOutAsync();
+            //    await HttpContext.SignOutAsync();
+            //    return Redirect($"{_appOptions.FrontendUrl}/authcallbacksignout");
+            //    //return Redirect("~/");
+            //}
+            var context = await _interaction.GetLogoutContextAsync(logoutId);
+            await _signInManager.SignOutAsync();
+            await HttpContext.SignOutAsync();
+            return Redirect(context.PostLogoutRedirectUri);
         }
 
         /// <summary>
         /// Handle logout page postback
         /// </summary>
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Logout(LogoutInputModel model)
-        {
-            // build a model so the logged out page knows what to display
-            var vm = await BuildLoggedOutViewModelAsync(model.LogoutId);
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> Logout(LogoutInputModel model)
+        //{
+        //    // build a model so the logged out page knows what to display
+        //    var vm = await BuildLoggedOutViewModelAsync(model.LogoutId);
 
-            if (User?.Identity.IsAuthenticated == true)
-            {
-                // delete local authentication cookie
-                await _signInManager.SignOutAsync();
+        //    if (User?.Identity.IsAuthenticated == true)
+        //    {
+        //        // delete local authentication cookie
+        //        await _signInManager.SignOutAsync();
 
-                // raise the logout event
-                await _events.RaiseAsync(new UserLogoutSuccessEvent(User.GetSubjectId(), User.GetDisplayName()));
-            }
+        //        // raise the logout event
+        //        await _events.RaiseAsync(new UserLogoutSuccessEvent(User.GetSubjectId(), User.GetDisplayName()));
+        //    }
 
-            // check if we need to trigger sign-out at an upstream identity provider
-            if (vm.TriggerExternalSignout)
-            {
-                // build a return URL so the upstream provider will redirect back
-                // to us after the user has logged out. this allows us to then
-                // complete our single sign-out processing.
-                string url = Url.Action("Logout", new { logoutId = vm.LogoutId });
+        //    // check if we need to trigger sign-out at an upstream identity provider
+        //    if (vm.TriggerExternalSignout)
+        //    {
+        //        // build a return URL so the upstream provider will redirect back
+        //        // to us after the user has logged out. this allows us to then
+        //        // complete our single sign-out processing.
+        //        string url = Url.Action("Logout", new { logoutId = vm.LogoutId });
 
-                // this triggers a redirect to the external provider for sign-out
-                return SignOut(new AuthenticationProperties { RedirectUri = url }, vm.ExternalAuthenticationScheme);
-            }
+        //        // this triggers a redirect to the external provider for sign-out
+        //        return SignOut(new AuthenticationProperties { RedirectUri = url }, vm.ExternalAuthenticationScheme);
+        //    }
 
-            return View("LoggedOut", vm);
-        }
+        //    return View("LoggedOut", vm);
+        //}
 
         [HttpGet]
         public IActionResult AccessDenied()
